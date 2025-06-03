@@ -20,8 +20,9 @@
         transition: margin-left 0.3s ease;
 
         .main-content {
-            overflow-y: auto; // ✅ solo aparece si es necesario
-            min-height: calc(100vh - 85px);
+            overflow-y: auto;
+            min-height: 100%;
+            background-color: #f2f2f2;
         }
     }
 

@@ -4,7 +4,7 @@ import AlertService from "@/services/AlertService";
 
 export default function Dashboard() {
   return <Content>
-    <button onClick={() => {
+    {/* <button onClick={() => {
       AlertService.show({
         title: 'Confirmar acción',
         message: (
@@ -18,8 +18,11 @@ export default function Dashboard() {
         cancelAction: () => console.log('Cancelado'),
         hasCancel: true,
       });
-    }}>click</button>
+    }}>click</button> */}
     <DynamicTable
+      selectable={true}
+      singleSelection={true}
+      keyTag="email"
       columns={[
         { key: 'name', label: 'Nombre', sortable: true },
         { key: 'email', label: 'Correo', sortable: true },
@@ -29,6 +32,9 @@ export default function Dashboard() {
         { name: 'Ana', email: 'ana@mail.com', phone: '123456789' },
         { name: 'Luis', email: 'luis@mail.com', phone: '987654321' }
       ]}
+      onSelectionChange={(selected) => {
+        console.log("Seleccionados:", selected);
+      }}
     />
 
   </Content>
