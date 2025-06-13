@@ -18,6 +18,7 @@ $capsule->addConnection([
     'charset'   => $_ENV['DB_CHARSET'],
     'collation' => $_ENV['DB_COLLATION'],
     'prefix'    => $_ENV['DB_PREFIX'],
+    'schema'    => 'public'
 ]);
 
 $capsule->setAsGlobal();

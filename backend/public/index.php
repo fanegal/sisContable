@@ -15,11 +15,16 @@ $app = AppFactory::create();
 // Rutas
 
 $app->post('/auth/token', [AuthController::class, 'getToken']);
+$app->post('/auth/updateToken', [AuthController::class, 'updateToken']);
 
 $app->group('/user', function($group) {
     $group->get('', [UserController::class, 'getAll']);
+    $group->post('/paginated', [UserController::class, 'getPaginated']);
     $group->get('/{id}', [UserController::class, 'getById']);
     $group->post('', [UserController::class, 'create']);
+    $group->put('', [UserController::class, 'update']);
+    $group->delete('', [UserController::class, 'deleteBulk']);
+    $group->post('/bulk-upload', [UserController::class, 'bulkUpload']);
 })->add(new AuthMiddleware());
 
 // Middleware de errores global

@@ -1,0 +1,12 @@
+{
+  "hello": "Hola",
+  "welcome": "Bienvenido",
+  "logout": "Cerrar sesión",
+  "login": {
+    "username": "Usuario",
+    "password": "Contraseña",
+    "not-account": "¿Aún no tienes cuenta?",
+    "register": "Registrate",
+    "login":"Aceptar"
+  }
+}

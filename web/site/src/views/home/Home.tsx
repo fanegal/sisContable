@@ -1,6 +1,6 @@
 import './home.scss'
 
-export function Home() {
+export default function Home() {
   return (
     <section className="as-home">
       <div className="home-header">

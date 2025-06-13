@@ -1,15 +1,33 @@
-// src/main.tsx
-import { StrictMode } from "react"
-import { createRoot } from "react-dom/client"
-import { BrowserRouter } from "react-router-dom"
-import App from "./App"
-import "./index.css"
-import "./globals.scss"
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+import "./index.css";
+import "./globals.scss";
+import { ThemeProvider, initTranslations } from "common-lib";
+import { I18nextProvider } from "react-i18next";
+import i18n from "./services/Translate.service";
+import translationEN from "./assets/i18n/en.json";
+import translationES from "./assets/i18n/es.json";
+import { themes } from "./environment/environment.prod";
+
+const activeLang = localStorage.getItem("active-language") ?? "es";
+
+initTranslations({
+  es: { translation: translationES },
+  en: { translation: translationEN }
+}, activeLang);
+
+
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <ThemeProvider themes={themes}>
+        <I18nextProvider i18n={i18n}>
+          <App />
+        </I18nextProvider>
+      </ThemeProvider>
     </BrowserRouter>
   </StrictMode>
-)
+);

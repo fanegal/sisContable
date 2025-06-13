@@ -1,24 +1,7 @@
-import { Content } from "@/components/content/Content";
-import { DynamicTable } from "@/components/table/DynamicTable";
-import AlertService from "@/services/AlertService";
+import { Content, DynamicTable } from 'common-lib';
 
 export default function Dashboard() {
   return <Content>
-    {/* <button onClick={() => {
-      AlertService.show({
-        title: 'Confirmar acción',
-        message: (
-          <div>
-            <p>¿Estás seguro de continuar?</p>
-            <strong>Esto no se puede deshacer.</strong>
-          </div>
-        ),
-        cssClass: 'sidebar-alert',
-        acceptAction: () => console.log('Confirmado'),
-        cancelAction: () => console.log('Cancelado'),
-        hasCancel: true,
-      });
-    }}>click</button> */}
     <DynamicTable
       selectable={true}
       singleSelection={true}
