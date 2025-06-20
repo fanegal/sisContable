@@ -1,75 +1,85 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
-// Add a request interceptor
-axios.interceptors.request.use(
-  config => {
-    //const token = localStorageService.getAccessToken()
-    /* if (token) {
-      config.headers['Authorization'] = 'Bearer ' + token
-    } */
-    // config.headers['Content-Type'] = 'application/json';
-    return config
-  },
-  error => {
-    Promise.reject(error)
-  }
-)
-
-axios.interceptors.response.use(
-  response => {
-    
-    //response.data = response.data.data ? response.data.data : response.data;
-    return response;
-  },
-  function (error) {
-    const originalRequest = error.config
-
-    /* if (
-      error.response.status === 401 &&
-      originalRequest.url === 'http://127.0.0.1:3000/v1/auth/token'
-    ) {
-      router.push('/login')
-      return Promise.reject(error)
-    } */
-
-   /*  if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true
-      const refreshToken = localStorageService.getRefreshToken()
-      return axios
-        .post('/auth/token', {
-          refresh_token: refreshToken
-        })
-        .then(res => {
-          if (res.status === 201) {
-            localStorageService.setToken(res.data)
-            axios.defaults.headers.common['Authorization'] =
-              'Bearer ' + localStorageService.getAccessToken()
-            return axios(originalRequest)
-          }
-        })
-    } */
-    return Promise.reject(error)
-  }
-)
+export interface TokenProvider {
+  getToken(): Promise<string | null>;
+  refreshToken(): Promise<string | null>;
+}
 
 export class HttpService {
+  private basePath: string;
+  private tokenProvider?: TokenProvider;
+  private isBearer?: boolean;
 
-  static async get(url:string, headers:any = {}, signal = undefined) {
-    const res = await axios.get(url, {
-      headers: headers,
-      signal: signal
-    });
-    return res;
+  constructor(basePath: string, tokenProvider?: TokenProvider, isBearer?: boolean) {
+    this.basePath = basePath;
+    this.tokenProvider = tokenProvider;
+    this.isBearer = isBearer;
   }
 
-  static async post(url:string, request:any = {}, headers:any = {}) {
-    const res = await axios.post(url, request, {
-      headers: headers,
-    });
-    
-    return res;
+  private async createHeaders(headers: any = {}): Promise<any> {
+    let finalHeaders = { ...headers };
+
+    if (this.tokenProvider) {
+      const token = await this.tokenProvider.getToken();
+      if (token) {
+        finalHeaders["Authorization"] = `${this.isBearer ? "Bearer" : ""} ${token}`;
+      }
+    }
+
+    return finalHeaders;
   }
 
-  /**THIS ADD PUT, DELETE, PATCH, HEALTH, etc */
+  private async requestWithRetry(
+    method: "get" | "post" | "put" | "delete",
+    path: string,
+    data: any = {},
+    headers: any = {},
+    config: AxiosRequestConfig = {}
+  ): Promise<AxiosResponse> {
+    try {
+      const finalHeaders = await this.createHeaders(headers);
+      let response: any = await axios({
+        method,
+        url: `${this.basePath}${path}`,
+        data,
+        headers: finalHeaders,
+        ...config
+      });
+      return response.data;
+    } catch (err: any) {
+      if (err.response && err.response.status === 401 && this.tokenProvider) {
+        console.warn("401 detected, refreshing token...");
+        await this.tokenProvider.refreshToken();
+        try {
+          const finalHeadersRetry = await this.createHeaders(headers);
+          return await axios({
+            method,
+            url: `${this.basePath}${path}`,
+            data,
+            headers: finalHeadersRetry,
+            ...config
+          });
+        } catch (retryErr: any) {
+          return retryErr;
+        }
+      }
+      return err?.response?.data ?? {};
+    }
+  }
+
+  get(path: string, headers: any = {}, config: AxiosRequestConfig = {}) {
+    return this.requestWithRetry("get", path, {}, headers, config);
+  }
+
+  post(path: string, data: any = {}, headers: any = {}, config: AxiosRequestConfig = {}) {
+    return this.requestWithRetry("post", path, data, headers, config);
+  }
+
+  put(path: string, data: any = {}, headers: any = {}, config: AxiosRequestConfig = {}) {
+    return this.requestWithRetry("put", path, data, headers, config);
+  }
+
+  delete(path: string, headers: any = {}, config: AxiosRequestConfig = {}) {
+    return this.requestWithRetry("delete", path, {}, headers, config);
+  }
 }
-export default HttpService;

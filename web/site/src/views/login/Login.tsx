@@ -1,103 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { Form } from "common-lib";
 import "./login.scss";
-import { useTranslation } from 'react-i18next';
-import { Form, Icon, useDeviceDetect, useTheme, useUserSession } from "common-lib";
+import { useLoginPresenter } from "./LoginPresenter";
 
-export default function Login({ }) {
-    const device: any = useDeviceDetect();
-    const theme: any = useTheme();
-    const { t, i18n } = useTranslation();
-    const formRef = useRef(new Date().getTime());
-    const [form, setForm] = useState<any>([]);
-
-    const session = useUserSession();
-
-    const [loginData, setLoginData] = useState({
-        username: {
-            value: '',
-            error: false,
-            maxLength: 20
-        },
-        password: {
-            value: '',
-            error: false,
-            maxLength: 20
-        }
-    })
-
-    useEffect(() => {
-        console.log(theme);
-
-        setForm([
-            {
-                type: "text",
-                value: null,
-                label: "about.subject",
-                placeholder: "about.subject2",
-                id: "subjectf",
-                required: true,
-                hasTopLabel: true,
-                hasError: false,
-                error: "invite.errors.name",
-                globalExtraClass: "invite-input",
-                extraLeftComponent: (
-                    <div className="custom-icon-left" style={{
-                        background: theme.theme.color
-                    }}>
-                        <span className="material-icons-outlined" style={{
-                            color: theme.theme.componentColor
-                        }}>photo_camera</span>
-                    </div>
-                ),
-            },
-            {
-                type: "password",
-                value: null,
-                label: "about.what",
-                placeholder: "about.what",
-                required: true,
-                id: "subjectf2",
-                hasTopLabel: true,
-                hasError: false,
-                error: "invite.errors.name",
-                globalExtraClass: "invite-input",
-                hasEye: false,
-                extraLeftComponent: (
-                    <div className="custom-icon-left" style={{
-                        background: theme.theme.color
-                    }}>
-                        <span className="material-icons-outlined" style={{
-                            color: theme.theme.componentColor
-                        }}>key</span>
-                    </div>
-                ),
-                extraComponent: (
-                    <div className="custom-icon-right" style={{
-                        background: theme.theme.color
-                    }} onClick={() => {
-                        let eye = document.getElementById("eye1");
-                        let pass:any = document.getElementById("subjectf2")
-                        if (eye!.innerHTML == 'visibility') {
-                            eye!.innerHTML = 'visibility_off';
-                            pass!.type = 'text';
-                        } else {
-                            eye!.innerHTML = 'visibility';
-                            pass!.type = 'password';
-                        }
-                    }}>
-                        <span className="material-icons-outlined" style={{
-                            color: theme.theme.componentColor
-                        }} id="eye1">visibility</span>
-                    </div>
-                ),
-            },
-        ])
-    }, [theme])
-
-    function toggleForm() {
-        const container: any = document.querySelector(".container");
-        container.classList.toggle("active");
-    };
+export default function Login() {
+    const { form, formRef, t, toggleForm, onSubmit } = useLoginPresenter();
 
     return <section className="login">
         <section id="reg_login">
@@ -112,20 +18,14 @@ export default function Login({ }) {
                                 data={form}
                                 form={formRef}
                                 hasAction={true}
-                                buttonAction={() => {
-                                    console.log("click");
-
-                                }}
+                                buttonAction={onSubmit}
                                 buttonText={t("login.login")}
                                 extraClass={"about-form"}
-                                onChangeForm={(e, index) => { }}
+                                onChangeForm={() => { }}
+                                onBlurForm={() => {
+
+                                }}
                             ></Form>
-                            {/* <p className="signup">
-                                {t('login.not-account')}
-                                <a href="#" onClick={() => {
-                                    toggleForm();
-                                }}> {t('login.register')}.</a>
-                            </p> */}
                         </section>
                     </div>
                 </div>
@@ -140,9 +40,7 @@ export default function Login({ }) {
                             <input type="submit" name="signup" value="Sign Up" />
                             <p className="signup">
                                 Already have an account ?
-                                <a href="#" onClick={() => {
-                                    toggleForm();
-                                }}>Sign in.</a>
+                                <a href="#" onClick={toggleForm}>Sign in.</a>
                             </p>
                         </section>
                     </div>

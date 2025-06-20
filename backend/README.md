@@ -17,12 +17,12 @@ composer install
 
 ## Ejecución local
 ```bash
-php -S localhost:8080 -t public
+php -S localhost:8000 -t public
 ````
 
 ## Accede al path
 ```bash
-http://localhost:8080
+http://localhost:8000
 ````
 
 ##Estructura de proyecto

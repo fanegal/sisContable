@@ -1,11 +1,13 @@
+import LocalStorageEncryptService from "./../services/LocalStorageEncrypt";
 import { Navigate, Outlet } from "react-router-dom";
 
 const isAuthenticated = () => {
-  return !!sessionStorage.getItem("jwt");
+  return !!LocalStorageEncryptService.getFromLocalStorage("userSession", true);
 };
 
 export const PrivateRoute = () => {
-  return isAuthenticated() ? <Outlet /> : <Navigate to="/login" replace />;
+  let access = isAuthenticated();
+  return access ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
 export default PrivateRoute;

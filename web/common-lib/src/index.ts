@@ -28,9 +28,10 @@ export { default as PublicRoute } from './routes/PublicRoute';
 //services
 export { default as AlertService } from './services/AlertService';
 export { default as EventService } from './services/EventService';
-export { default as HttpService } from './services/HttpService';
+export * from './services/HttpService';
 export { default as LocalStorageEncryptService } from './services/LocalStorageEncrypt';
 export { default as UtilService } from './services/UtilService';
+export { default as LoadingService } from './services/LoadingService';
 
 //translations
 export { initTranslations, changeLanguage } from './i18n/i18n';

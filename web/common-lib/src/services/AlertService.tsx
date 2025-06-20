@@ -13,6 +13,15 @@ interface AlertOptions {
     hasCancel?: boolean;
 }
 
+
+interface ToastOptions {
+    message: string | React.ReactNode;
+    durationMs?: number; 
+    position?: 'top-end' | 'top-start' | 'bottom-end' | 'bottom-start' | 'top' | 'bottom' | 'center';
+    cssClass?: string;
+    level?: 'success' | 'error' | 'warn' | 'info';
+}
+
 const AlertService = {
     show: async ({
         title,
@@ -86,6 +95,47 @@ const AlertService = {
         if (result.isConfirmed && acceptAction) acceptAction();
         if (result.isDismissed && cancelAction) cancelAction();
     },
+
+    toast: async ({
+        message,
+        durationMs = 5000,
+        position = 'bottom-end',
+        cssClass,
+        level = 'info'
+    }: ToastOptions) => {
+        let levelClass = '';
+        switch (level) {
+            case 'success':
+                levelClass = 'toast-success';
+                break;
+            case 'error':
+                levelClass = 'toast-error';
+                break;
+            case 'warn':
+                levelClass = 'toast-warn';
+                break;
+            case 'info':
+            default:
+                levelClass = 'toast-info';
+        }
+
+        await MySwal.fire({
+            toast: true,
+            position,
+            html: <>{message}</>,
+            showConfirmButton: false,
+            showCloseButton: true,
+            timer: durationMs,
+            timerProgressBar: true,
+            customClass: {
+                popup: `my-toast-popup ${levelClass} ${cssClass || ''}`
+            },
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+        });
+    }
 };
 
 export default AlertService;

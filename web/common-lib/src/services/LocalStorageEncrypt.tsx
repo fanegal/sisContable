@@ -46,7 +46,7 @@ export class LocalStorageEncryptService {
    * @param key Llave a almacenar
    * @param data Dato a almacenar
    */
-  static setToLocalStorage(key: string, data: any) {
+  static setToLocalStorage(key: string, data: any, isSession:boolean = false) {
     let encryptedData = CryptoJS.AES.encrypt(
       JSON.stringify(data),
       this.secretKey
@@ -56,8 +56,7 @@ export class LocalStorageEncryptService {
 
     encryptedData = JSON.stringify(data);
     encryptedKey = key;
-    localStorage.setItem(encryptedKey, encryptedData);
-
+    (isSession ? sessionStorage : localStorage).setItem(encryptedKey, encryptedData);
   }
 
   static yayirobe(data: any) {
@@ -70,10 +69,10 @@ export class LocalStorageEncryptService {
    * Recupera valores del localstorage por medio de la llave
    * @param key Llave a obtener
    */
-  static getFromLocalStorage(key: string): any {
+  static getFromLocalStorage(key: string, isSession:boolean = false): any {
     let encryptedKey = CryptoJS.SHA256(key).toString();
     encryptedKey = key;
-    const item = localStorage.getItem(encryptedKey);
+    const item = (isSession ? sessionStorage : localStorage).getItem(encryptedKey);
     if (item === undefined || item === null) {
       return null;
     }

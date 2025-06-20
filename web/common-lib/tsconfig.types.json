@@ -12,7 +12,7 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
+    "emitDeclarationOnly": false,
     "declarationDir": "./dist",
     "outDir": "./dist",
     "moduleResolution": "node"

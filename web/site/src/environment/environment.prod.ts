@@ -12,3 +12,11 @@ export const themes = {
     component: "#003245",
   },
 };
+
+export const basePath = "http://localhost:8000";
+
+export const environment = {
+  tokenPath: `/auth/token`,
+  login: `/user/login`,
+  getUsersByPagination: `/user/paginated`
+};
