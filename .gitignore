@@ -31,4 +31,5 @@ dist-ssr
 /backend/vendor
 /robot/AgenteSC/.vs/
 /robot/AgenteSC/obj/
+/robot/AgenteSC/bin/
 
