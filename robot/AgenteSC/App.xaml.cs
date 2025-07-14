@@ -1,8 +1,9 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
 using System.Windows;
 using ControlzEx.Theming;
+using AgenteSC.Views;
 
-namespace Agente
+namespace AgenteSC
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -18,6 +19,8 @@ namespace Agente
             // Set the application theme to Dark.Green
             ThemeManager.Current.ChangeTheme(this, "Light.Red");
        
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
         }
     }
 }

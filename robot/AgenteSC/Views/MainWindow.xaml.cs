@@ -3,7 +3,7 @@ using Hardcodet.Wpf.TaskbarNotification;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Agente
+namespace AgenteSC.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
