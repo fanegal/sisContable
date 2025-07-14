@@ -957,31 +957,6 @@ export default function Input({
           </>
         );
 
-        /* input = (
-          <form
-            className={`drowpdown-container dropinline ${inputData.extraClass}`}
-            id={idGlb}
-          >
-            <div className="drowpdown-container-group">
-              <span className="drowpdown-container-arrow">
-                <img src={down} />
-              </span>
-              <select
-                id={`common-input-${index}`}
-                key={`common-key-${index}-${UtilService.getRandomInt(1,9999999)}`}
-                className={`film-input dropdown`}
-                name={`common-name-${index}`}
-                value={inputEnter}
-                onInput={handleChange}
-              >
-                {inputData.values?.map((op) => {
-                  return <option value={op.value}>{op.label}</option>;
-                })}
-              </select>
-            </div>
-          </form>
-        ); */
-
         break;
     }
     return input;

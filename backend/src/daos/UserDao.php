@@ -5,6 +5,7 @@ use App\Dto\PaginationParams;
 use App\Exceptions\BadRequestException;
 use App\Exceptions\NotFoundException;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserDao {
     public function findAll() {
@@ -101,6 +102,7 @@ class UserDao {
 
         return [
             'items' => $items,
+            //'query' => $query->toSql(),
             'pagination' => [
                 'page' => $params->page,
                 'limit' => $params->limit,

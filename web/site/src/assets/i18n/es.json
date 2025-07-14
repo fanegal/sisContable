@@ -7,6 +7,9 @@
     "password": "Contraseña",
     "not-account": "¿Aún no tienes cuenta?",
     "register": "Registrate",
-    "login":"Aceptar"
+    "login": "Aceptar"
+  },
+  "errors": {
+    "required": "Campo requerido"
   }
 }

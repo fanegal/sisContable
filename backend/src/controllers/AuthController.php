@@ -81,4 +81,34 @@ class AuthController {
         return $response->withStatus( 200 )->withHeader( 'Content-Type', 'application/json' );
     }
 
+    public function login( Request $request, Response $response, array $args ): Response {
+        $body = $request->getBody()->getContents();
+        $data = json_decode( $body, true );
+
+        $username = $data[ 'username' ] ?? null;
+        $password = $data[ 'password' ] ?? null;
+
+        if ( !$username || !$password ) {
+            $response->getBody()->write( ApiResponse::error( 'Username y contraseña requeridos', 400 ) );
+            return $response->withStatus( 400 )->withHeader( 'Content-Type', 'application/json' );
+        }
+
+        $userDao = new UserDao();
+        $user = $userDao->findUser( $username, $password );
+
+        if ( !$user ) {
+            $response->getBody()->write( ApiResponse::error( 'Credenciales inválidas', 404 ) );
+            return $response->withStatus( 404 )->withHeader( 'Content-Type', 'application/json' );
+        }
+
+        $response->getBody()->write( ApiResponse::success( [
+            'username'=>$user[ 'username' ],
+            'name'=>$user[ 'name' ],
+            'lastName'=>$user[ 'last_name' ],
+            'email'=>$user[ 'email' ],
+            'urlImg'=>$user[ 'url_img' ],
+            'createAt'=>$user[ 'create_at' ]
+        ], 'Usuario encontrado' ) );
+        return $response->withStatus( 200 )->withHeader( 'Content-Type', 'application/json' );
+    }
 }

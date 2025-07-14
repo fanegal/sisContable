@@ -15,7 +15,7 @@
     "esModuleInterop": true,
     "declaration": true,
     "declarationDir": "./dist",
-    "emitDeclarationOnly": true,
+    "emitDeclarationOnly": false,
     "outDir": "./dist",
     "jsx": "react-jsx",
     "noUnusedLocals": true,
