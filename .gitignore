@@ -72,7 +72,11 @@ dist-ssr
 /robot/AgenteSC/.vs/AgenteSC/v17/.suo
 /robot/AgenteSC/.vs/AgenteSC/v17/DocumentLayout.backup.json
 /robot/AgenteSC/.vs/AgenteSC/v17/DocumentLayout.json
+<<<<<<< HEAD
 >>>>>>> avances robot
 /robot/AgenteSC/.vs/AgenteSC/FileContentIndex/e8b7ad54-4052-4182-a930-5a42f4884413.vsidx
 /robot/AgenteSC/.vs/AgenteSC/FileContentIndex/563ab8ff-58e8-4d48-b173-7f7798c3898a.vsidx
 /robot/AgenteSC/obj/Debug/net9.0-windows/AgenteSC_MarkupCompile.i.lref
+=======
+/robot/AgenteSC/.vs/AgenteSC/DesignTimeBuild/.dtbcache.v2
+>>>>>>> ignore
