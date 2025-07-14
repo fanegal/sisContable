@@ -28,3 +28,26 @@ dist-ssr
 .env
 
 /backend/vendor
+/robot/AgenteSC/.vs/AgenteSC/CopilotIndices/17.14.670.39694/CodeChunks.db
+/robot/AgenteSC/.vs/AgenteSC/CopilotIndices/17.14.786.1071/CodeChunks.db
+/robot/AgenteSC/.vs/AgenteSC/CopilotIndices/17.14.786.1071/CodeChunks.db-shm
+/robot/AgenteSC/.vs/AgenteSC/CopilotIndices/17.14.786.1071
+/robot/AgenteSC/.vs/AgenteSC/CopilotIndices/17.14.670.39694/SemanticSymbols.db
+/robot/AgenteSC/.vs/AgenteSC/FileContentIndex/af9bfdd9-c1f4-4d9c-9b15-843ef34ee910.vsidx
+/robot/AgenteSC/.vs/AgenteSC/FileContentIndex/4fb47cf8-acf2-4573-83f2-e153c5b6ea75.vsidx
+/robot/AgenteSC/.vs/AgenteSC/FileContentIndex/e5d02e02-0088-4fb0-b4ad-35de56cbcfae.vsidx
+/robot/AgenteSC/.vs/ProjectEvaluation/agentesc.metadata.v9.bin
+/robot/AgenteSC/.vs/ProjectEvaluation/agentesc.projects.v9.bin
+/robot/AgenteSC/.vs/ProjectEvaluation/agentesc.strings.v9.bin
+/robot/AgenteSC/obj/project.nuget.cache
+/robot/AgenteSC/obj/AgenteSC.csproj.nuget.dgspec.json
+/robot/AgenteSC/obj/AgenteSC.csproj.nuget.g.props
+/robot/AgenteSC/obj/project.assets.json
+/robot/AgenteSC/obj/Debug/net9.0-windows/AgenteSC.AssemblyInfo.cs
+/robot/AgenteSC/obj/Debug/net9.0-windows/AgenteSC.AssemblyInfoInputs.cache
+/robot/AgenteSC/obj/Debug/net9.0-windows/AgenteSC.designer.runtimeconfig.json
+/robot/AgenteSC/obj/Debug/net9.0-windows/AgenteSC.assets.cache
+/robot/AgenteSC/obj/Debug/net9.0-windows/AgenteSC_MarkupCompile.i.cache
+/robot/AgenteSC/obj/Debug/net9.0-windows/AgenteSC.GeneratedMSBuildEditorConfig.editorconfig
+/robot/AgenteSC/obj/Debug/net9.0-windows/App.g.i.cs
+/robot/AgenteSC/obj/Debug/net9.0-windows/MainWindow.g.i.cs
