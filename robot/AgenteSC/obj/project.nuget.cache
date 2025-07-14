@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "yVpAgOkYD28=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\DEVANT\\source\\repos\\SistemaEladio\\robot\\AgenteSC\\AgenteSC.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\DEVANT\\.nuget\\packages\\controlzex\\4.4.0\\controlzex.4.4.0.nupkg.sha512",
+    "C:\\Users\\DEVANT\\.nuget\\packages\\hardcodet.notifyicon.wpf\\2.0.1\\hardcodet.notifyicon.wpf.2.0.1.nupkg.sha512",
+    "C:\\Users\\DEVANT\\.nuget\\packages\\mahapps.metro\\2.4.10\\mahapps.metro.2.4.10.nupkg.sha512",
+    "C:\\Users\\DEVANT\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.19\\microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512",
+    "C:\\Users\\DEVANT\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512"
+  ],
+  "logs": []
+}
