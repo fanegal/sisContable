@@ -29,54 +29,6 @@ dist-ssr
 .env
 
 /backend/vendor
-/robot/AgenteSC/.vs/AgenteSC/CopilotIndices/17.14.670.39694/CodeChunks.db
-/robot/AgenteSC/.vs/AgenteSC/CopilotIndices/17.14.786.1071/CodeChunks.db
-/robot/AgenteSC/.vs/AgenteSC/CopilotIndices/17.14.786.1071/CodeChunks.db-shm
-/robot/AgenteSC/.vs/AgenteSC/CopilotIndices/17.14.786.1071
-/robot/AgenteSC/.vs/AgenteSC/CopilotIndices/17.14.670.39694/SemanticSymbols.db
-/robot/AgenteSC/.vs/AgenteSC/FileContentIndex/af9bfdd9-c1f4-4d9c-9b15-843ef34ee910.vsidx
-/robot/AgenteSC/.vs/AgenteSC/FileContentIndex/4fb47cf8-acf2-4573-83f2-e153c5b6ea75.vsidx
-/robot/AgenteSC/.vs/AgenteSC/FileContentIndex/e5d02e02-0088-4fb0-b4ad-35de56cbcfae.vsidx
-/robot/AgenteSC/.vs/ProjectEvaluation/agentesc.metadata.v9.bin
-/robot/AgenteSC/.vs/ProjectEvaluation/agentesc.projects.v9.bin
-/robot/AgenteSC/.vs/ProjectEvaluation/agentesc.strings.v9.bin
-/robot/AgenteSC/obj/project.nuget.cache
-/robot/AgenteSC/obj/AgenteSC.csproj.nuget.dgspec.json
-/robot/AgenteSC/obj/AgenteSC.csproj.nuget.g.props
-/robot/AgenteSC/obj/project.assets.json
-/robot/AgenteSC/obj/Debug/net9.0-windows/AgenteSC.AssemblyInfo.cs
-/robot/AgenteSC/obj/Debug/net9.0-windows/AgenteSC.AssemblyInfoInputs.cache
-/robot/AgenteSC/obj/Debug/net9.0-windows/AgenteSC.designer.runtimeconfig.json
-/robot/AgenteSC/obj/Debug/net9.0-windows/AgenteSC.assets.cache
-/robot/AgenteSC/obj/Debug/net9.0-windows/AgenteSC_MarkupCompile.i.cache
-/robot/AgenteSC/obj/Debug/net9.0-windows/AgenteSC.GeneratedMSBuildEditorConfig.editorconfig
-/robot/AgenteSC/obj/Debug/net9.0-windows/App.g.i.cs
-/robot/AgenteSC/obj/Debug/net9.0-windows/MainWindow.g.i.cs
-=======
-﻿################################################################################
-# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
-################################################################################
+/robot/AgenteSC/.vs/
+/robot/AgenteSC/obj/
 
-/robot/AgenteSC/.vs/AgenteSC/CopilotIndices/17.14.670.39694/CodeChunks.db
-/robot/AgenteSC/.vs/AgenteSC/CopilotIndices/17.14.670.39694/CodeChunks.db-shm
-/robot/AgenteSC/.vs/AgenteSC/CopilotIndices/17.14.670.39694/CodeChunks.db-wal
-/robot/AgenteSC/.vs/AgenteSC/CopilotIndices/17.14.670.39694/SemanticSymbols.db
-/robot/AgenteSC/.vs/AgenteSC/CopilotIndices/17.14.670.39694/SemanticSymbols.db-shm
-/robot/AgenteSC/.vs/AgenteSC/CopilotIndices/17.14.670.39694/SemanticSymbols.db-wal
-/robot/AgenteSC/.vs/AgenteSC/FileContentIndex/24c34930-bdb7-46af-8aae-7b00b3fbfa8c.vsidx
-/robot/AgenteSC/.vs/AgenteSC/FileContentIndex/92882844-e8b7-4691-a705-fbd059f3c477.vsidx
-/robot/AgenteSC/.vs/AgenteSC/FileContentIndex/af9bfdd9-c1f4-4d9c-9b15-843ef34ee910.vsidx
-/robot/AgenteSC/.vs/AgenteSC/FileContentIndex/f4074ca1-983c-4872-8d6d-3c96023defc5.vsidx
-/robot/AgenteSC/.vs/AgenteSC/v16/.suo
-/robot/AgenteSC/.vs/AgenteSC/v17/.futdcache.v2
-/robot/AgenteSC/.vs/AgenteSC/v17/.suo
-/robot/AgenteSC/.vs/AgenteSC/v17/DocumentLayout.backup.json
-/robot/AgenteSC/.vs/AgenteSC/v17/DocumentLayout.json
-<<<<<<< HEAD
->>>>>>> avances robot
-/robot/AgenteSC/.vs/AgenteSC/FileContentIndex/e8b7ad54-4052-4182-a930-5a42f4884413.vsidx
-/robot/AgenteSC/.vs/AgenteSC/FileContentIndex/563ab8ff-58e8-4d48-b173-7f7798c3898a.vsidx
-/robot/AgenteSC/obj/Debug/net9.0-windows/AgenteSC_MarkupCompile.i.lref
-=======
-/robot/AgenteSC/.vs/AgenteSC/DesignTimeBuild/.dtbcache.v2
->>>>>>> ignore
