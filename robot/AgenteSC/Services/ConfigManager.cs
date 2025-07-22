@@ -34,7 +34,23 @@ namespace AgenteSC.Services
         /// </summary>
         private void CreateDefaultConfig()
         {
-            ConfigJson defaultConfig = new ConfigJson();
+            ConfigJson defaultConfig = new ConfigJson() { 
+                _destino = new Destino
+                {
+                    NombreEnte = "Nombre del Ente",
+                    Ejercicio = "",
+                    UsuarioBD = "",
+                    PasswordBD = "",
+                    UbicacionBD = ""
+                },
+                _origen = new Origen
+                {
+                    NombreServidor = "Nombre del Servidor",
+                    Usuario = "",
+                    Password = "",
+                    Log = ""
+                }
+            };
             WriteConfig(defaultConfig);
             Console.WriteLine($"[ConfigManager] Archivo '{ConfigFileName}' creado con configuración por defecto.");
             // Podrías usar un Logger o un MessageBox si estás en un contexto UI

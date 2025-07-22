@@ -30,7 +30,9 @@
                     <!-- Campo Nombre del Ente -->
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,10,0,10">
                         <TextBlock Text="Nombre del Ente:" Width="150" VerticalAlignment="Center"/>
-                        <TextBox Width="250"/>
+                        <TextBox 
+                            Width="250" 
+                            Text="{Binding NombreEnte , UpdateSourceTrigger=PropertyChanged}"     />
                     </StackPanel>
 
                     <!-- Campo Nombre del Ente -->
@@ -43,7 +45,9 @@
                     <!-- Campo Usuario BD -->
                     <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,10">
                         <TextBlock Text="Usuario de la BD:" Width="150" VerticalAlignment="Center"/>
-                        <TextBox Width="250"/>
+                        <TextBox 
+                            Width="250"
+                            Text="{Binding UsuarioBD, UpdateSourceTrigger=PropertyChanged}"     />
                     </StackPanel>
 
                     <!-- Campo Contraseña BD -->
@@ -55,14 +59,28 @@
                     <!-- Campo Ubicación BD -->
                     <StackPanel Orientation="Horizontal" Grid.Row="4" Margin="0,10,0,10">
                         <TextBlock Text="Ubicación de la BD:" Width="150" VerticalAlignment="Center"/>
-                        <TextBox x:Name="txturlbd" Width="200" IsReadOnly="True"/>
-                        <Button Content="Buscar" Margin="-1,0,0,0" Width="50"/>
+                        <TextBox 
+                            Width="200" 
+                            IsReadOnly="True"
+                            Text="{Binding UbicacionBD, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button 
+                            Content="Buscar" 
+                            Margin="-1,0,0,0"
+                            Width="50"
+                            Command="{Binding BuscarBDCommand}"/>
                     </StackPanel>
 
                     <!-- Botón Guardar -->
                     <StackPanel Grid.Row="4" HorizontalAlignment="Right" Margin="10,20,0,0">
-                        <Button Content="Guardar" Width="100"/>
+                        <Button 
+                            Content="Guardar" 
+                            Command="{Binding GuardarCommand}"
+                            Width="100"/> 
                     </StackPanel>
+
+                    <!-- Error Messages TextBlock -->
+                    <TextBlock  Text="{Binding ErrorMessageDestino}" Foreground="Red" Margin="0,5,0,5"/>
+
                 </Grid>
             </TabItem>
 
@@ -95,7 +113,7 @@
                         <PasswordBox Width="250"/>
                     </StackPanel>
 
-                    <!-- Campo IP / Dirección -->
+                    <!--log -->
                     <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,10,0,10">
                         <TextBlock Text="Log:" Width="150" VerticalAlignment="Center"/>
                         <TextBox Width="250"/>
@@ -104,7 +122,7 @@
 
                     <!-- Botón Guardar -->
                     <StackPanel Grid.Row="4" HorizontalAlignment="Right" Margin="10,20,0,0">
-                        <Button Content="Guardar" Width="100"/>
+                        <Button Content="Registrar" Width="100"/>
                     </StackPanel>
                 </Grid>
             </TabItem>

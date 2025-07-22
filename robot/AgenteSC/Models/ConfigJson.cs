@@ -8,8 +8,8 @@ namespace AgenteSC.Models
 {
     public class ConfigJson
     {
-        public string _destino { get; set; }
-        public string _origen { get; set; }
+        public Destino _destino { get; set; }
+        public Origen _origen { get; set; }
     }
 
 
