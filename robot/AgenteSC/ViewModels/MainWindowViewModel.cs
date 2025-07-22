@@ -46,13 +46,64 @@ namespace AgenteSC.ViewModels
         }
         public ICommand GuardarCommand { get; }
         public ICommand BuscarBDCommand { get; }
+        public ICommand RegistrarCommand { get; }
+
+        private string _nombreServidor;
+        public string NombreServidor
+        {
+            get => _nombreServidor;
+            set { _nombreServidor = value; OnPropertyChanged(); }
+        }
+
+        private string _usuarioOrigen;
+        public string UsuarioOrigen
+        {
+            get => _usuarioOrigen;
+            set { _usuarioOrigen = value; OnPropertyChanged(); }
+        }
+
+        private string _passwordOrigen;
+        public string PasswordOrigen
+        {
+            get => _passwordOrigen;
+            set { _passwordOrigen = value; OnPropertyChanged(); }
+        }
+
+        private string _log;
+        public string Log
+        {
+            get => _log;
+            set { _log = value; OnPropertyChanged(); }
+        }
+
+        private readonly BackgroundService _backgroundService;
+        private readonly Logger _logger;
+
         public MainWindowViewModel()
         {
             _file = new ConfigManager();
-            _file.EnsureConfigExistsAndLoad();
+            var config = _file.EnsureConfigExistsAndLoad();
+
+            NombreEnte = config._destino.NombreEnte;
+            UsuarioBD = config._destino.UsuarioBD;
+            UbicacionBD = config._destino.UbicacionBD;
+
+            NombreServidor = config._origen.NombreServidor;
+            UsuarioOrigen = config._origen.Usuario;
+            PasswordOrigen = config._origen.Password;
+            Log = config._origen.Log;
 
             GuardarCommand = new RelayCommand(Guardar, CanGuardar);
             BuscarBDCommand = new RelayCommand(BuscarBD);
+            RegistrarCommand = new RelayCommand(Registrar);
+
+            _logger = new Logger();
+            _backgroundService = new BackgroundService(_file, _logger);
+            _backgroundService.LogUpdated += (logContent) =>
+            {
+                Log = logContent;
+            };
+            _backgroundService.Start();
         }
 
         private void BuscarBD()
@@ -70,8 +121,11 @@ namespace AgenteSC.ViewModels
 
         private void Guardar()
         {
-            
-
+            var config = _file.ReadConfig();
+            config._destino.NombreEnte = NombreEnte;
+            config._destino.UsuarioBD = UsuarioBD;
+            config._destino.UbicacionBD = UbicacionBD;
+            _file.WriteConfig(config);
         }
 
         private void ValidaPropiedadesDestino()
@@ -83,6 +137,23 @@ namespace AgenteSC.ViewModels
                 ErrorMessageDestino = "El campo 'Usuario' no puede estar vacío.";
                 return;
             }
+        }
+
+        private void Registrar()
+        {
+            var config = _file.ReadConfig();
+            config._origen.NombreServidor = NombreServidor;
+            config._origen.Usuario = UsuarioOrigen;
+            config._origen.Password = PasswordOrigen;
+            config._origen.Log = Log;
+            _file.WriteConfig(config);
+
+            ConsultarApi();
+        }
+
+        private void ConsultarApi()
+        {
+            // This method will be implemented in the future to send the destination values to an API.
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
