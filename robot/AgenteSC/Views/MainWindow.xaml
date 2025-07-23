@@ -1,0 +1,153 @@
+﻿<Controls:MetroWindow x:Class="AgenteSC.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AgenteSC.Views" 
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        WindowState="Normal" ResizeMode="CanMinimize"
+        Icon="pack://application:,,,/icon.ico"
+        Title="Agente"
+        WindowStartupLocation="CenterScreen"
+        DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}"
+        Height="400" Width="600" StateChanged="MetroWindow_StateChanged">
+
+    <Grid>
+        <Controls:MetroTabControl BorderThickness="1" BorderBrush="Gray" TabStripPlacement="Top" FontSize="16" Padding="10">
+            <TabItem Header="Destino">
+                <Grid Background="{DynamicResource WindowBackgroundBrush}" Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Campo Nombre del Ente -->
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,10,0,10">
+                        <TextBlock Text="Nombre del Ente:" Width="150" VerticalAlignment="Center"/>
+                        <TextBox 
+                            Width="250" 
+                            Text="{Binding NombreEnte , UpdateSourceTrigger=PropertyChanged}"     />
+                    </StackPanel>
+
+                    <!-- Campo Nombre del Ente -->
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,10,0,10">
+                        <TextBlock Text="Ejercicio:" Width="150" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="cboEjercicio" Width="150" SelectedIndex="0">
+                        </ComboBox>
+                    </StackPanel>
+
+                    <!-- Campo Usuario BD -->
+                    <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,10">
+                        <TextBlock Text="Usuario de la BD:" Width="150" VerticalAlignment="Center"/>
+                        <TextBox 
+                            Width="250"
+                            Text="{Binding UsuarioBD, UpdateSourceTrigger=PropertyChanged}"     />
+                    </StackPanel>
+
+                    <!-- Campo Contraseña BD -->
+                    <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,10,0,10">
+                        <TextBlock Text="Contraseña de la BD:" Width="150" VerticalAlignment="Center"/>
+                        <PasswordBox Width="250"/>
+                    </StackPanel>
+
+                    <!-- Campo Ubicación BD -->
+                    <StackPanel Orientation="Horizontal" Grid.Row="4" Margin="0,10,0,10">
+                        <TextBlock Text="Ubicación de la BD:" Width="150" VerticalAlignment="Center"/>
+                        <TextBox 
+                            Width="200" 
+                            IsReadOnly="True"
+                            Text="{Binding UbicacionBD, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button 
+                            Content="Buscar" 
+                            Margin="-1,0,0,0"
+                            Width="50"
+                            Command="{Binding BuscarBDCommand}"/>
+                    </StackPanel>
+
+                    <!-- Botón Guardar -->
+                    <StackPanel Grid.Row="4" HorizontalAlignment="Right" Margin="10,20,0,0">
+                        <Button 
+                            Content="Guardar" 
+                            Command="{Binding GuardarCommand}"
+                            Width="100"/> 
+                    </StackPanel>
+
+                    <!-- Error Messages TextBlock -->
+                    <TextBlock  Text="{Binding ErrorMessageDestino}" Foreground="Red" Margin="0,5,0,5"/>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Origen">
+                <Grid Background="{DynamicResource WindowBackgroundBrush}" Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Campo Nombre del Servidor -->
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,10,0,10">
+                        <TextBlock Text="Nombre del Servidor:" Width="150" VerticalAlignment="Center"/>
+                        <TextBox Width="250"/>
+                        <Button Content="Test Conexión" Margin="10,0,0,0"/>
+                    </StackPanel>
+
+                    <!-- Campo Usuario -->
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,10,0,10">
+                        <TextBlock Text="Usuario:" Width="150" VerticalAlignment="Center"/>
+                        <TextBox Width="250"/>
+                    </StackPanel>
+
+                    <!-- Campo Contraseña -->
+                    <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,10">
+                        <TextBlock Text="Contraseña:" Width="150" VerticalAlignment="Center"/>
+                        <PasswordBox Width="250"/>
+                    </StackPanel>
+
+                    <!--log -->
+                    <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,10,0,10">
+                        <TextBlock Text="Log:" Width="150" VerticalAlignment="Center"/>
+                        <TextBox Width="250"/>
+
+                    </StackPanel>
+
+                    <!-- Botón Guardar -->
+                    <StackPanel Grid.Row="4" HorizontalAlignment="Right" Margin="10,20,0,0">
+                        <Button Content="Registrar" Width="100"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Servicio">
+                <Grid Background="{DynamicResource WindowBackgroundBrush}">
+                    <!-- Aquí puedes definir la estructura de Servicio -->
+                </Grid>
+            </TabItem>
+        </Controls:MetroTabControl>
+        <tb:TaskbarIcon 
+            x:Name="MyTaskbarIcon"
+            IconSource="pack://application:,,,/icon.ico"
+            ToolTipText="My Application"
+            TrayLeftMouseDown="TaskbarIcon_TrayLeftMouseDown"
+            TrayRightMouseDown="TaskbarIcon_TrayRightMouseDown">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Mostrar" Click="Show_Click"/>
+                    <MenuItem Header="Ocultar" Click="Hide_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Salir" Click="Exit_Click"/>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
+    </Grid>
+
+</Controls:MetroWindow>
