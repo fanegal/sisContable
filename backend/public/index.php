@@ -13,6 +13,15 @@ require __DIR__ . '/../src/config/Database.php';
 $app = AppFactory::create();
 
 $app->add(function ($request, $handler) {
+    if ($request->getMethod() === "OPTIONS") {
+        $response = new \Slim\Psr7\Response();
+        return $response
+            ->withHeader('Access-Control-Allow-Origin', 'http://localhost:5173')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+            ->withHeader('Access-Control-Allow-Credentials', 'true');
+    }
+
     $response = $handler->handle($request);
 
     return $response
@@ -31,10 +40,10 @@ $app->options('/{routes:.+}', function ($request, $response, $args) {
 $app->post('/user/login', [AuthController::class, 'login']);
 $app->post('/auth/token', [AuthController::class, 'getToken']);
 $app->post('/auth/updateToken', [AuthController::class, 'updateToken']);
+$app->post('/user/paginated', [UserController::class, 'getPaginated']);
 
 $app->group('/user', function($group) {
     $group->get('', [UserController::class, 'getAll']);
-    $group->post('/paginated', [UserController::class, 'getPaginated']);
     $group->get('/{id}', [UserController::class, 'getById']);
     $group->post('', [UserController::class, 'create']);
     $group->put('', [UserController::class, 'update']);

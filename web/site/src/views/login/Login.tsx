@@ -1,52 +1,61 @@
-import { Form } from "common-lib";
 import "./login.scss";
 import { useLoginPresenter } from "./LoginPresenter";
+import { CustomSwiper, Form, LayoutApp } from "common-lib";
+import "./login.scss";
 
 export default function Login() {
-    const { form, formRef, t, toggleForm, onSubmit } = useLoginPresenter();
+    const { form, formRef, t, toggleForm, onSubmit, swiperData, goRegister } = useLoginPresenter();
 
-    return <section className="login">
-        <section id="reg_login">
-            <div className="lefonde"></div>
-            <div className="container">
-                <div className="user signinBx">
-                    <div className="imgBx"><img src="/login1.png" alt="" /></div>
-                    <div className="formBx">
-                        <section className="form">
-                            <h2>Login</h2>
-                            <Form
-                                data={form}
-                                form={formRef}
-                                hasAction={true}
-                                buttonAction={onSubmit}
-                                buttonText={t("login.login")}
-                                extraClass={"about-form"}
-                                onChangeForm={() => { }}
-                                onBlurForm={() => {
+    return <LayoutApp logoSrc="/arsa-light-alpha.png" extraClass="login-layout">
+        <section className="login">
+            <CustomSwiper
+                title="Destacados"
+                subtitle="Nuestros productos estrella"
+                hasTitle={false}
+                hasPagination={true}
+                hasArrow={false}
+                hasScrollbar={false}
+                loop={true}
+                autoplay={true}
+                slidesPerView={1}
+                spaceBetween={10}
 
-                                }}
-                            ></Form>
-                        </section>
-                    </div>
-                </div>
-                <div className="user signupBx">
-                    <div className="formBx">
-                        <section className="form" >
-                            <h2>Create an account</h2>
-                            <input type="text" name="Username" placeholder="Username" required />
-                            <input type="email" name="email" placeholder="Email Address" required />
-                            <input type="password" name="crpass" placeholder="Create Password" required />
-                            <input type="password" name="conpass" placeholder="Confirm Password" required />
-                            <input type="submit" name="signup" value="Sign Up" />
-                            <p className="signup">
-                                Already have an account ?
-                                <a href="#" onClick={toggleForm}>Sign in.</a>
-                            </p>
-                        </section>
-                    </div>
-                    <div className="imgBx"><img src="/login2.jpg" alt="" /></div>
-                </div>
-            </div>
+                cssClass="login-swiper"
+            >
+                {
+                    swiperData.map(s => <div className="swiper-slide">
+                        <div className="login-background">
+                            <img src={s.img} alt="" />
+                        </div>
+                    </div>)
+                }
+
+            </CustomSwiper>
+
+            <section className="form">
+
+                <p className="title">{t("login.title")}</p>
+                <p className="description">{t("login.description")}</p>
+                <Form
+                    data={form}
+                    form={formRef}
+                    hasAction={true}
+                    buttonAction={onSubmit}
+                    buttonDisable={false}
+                    buttonText={t("login.login")}
+                    extraClass={"about-form"}
+                    onChangeForm={(e, index) => {
+                        console.log(e);
+                        console.log(index);
+
+                    }}
+                    onBlurForm={(e) => {
+                        if (e.id = "password") {
+
+                        }
+                    }}
+                ></Form>
+            </section>
         </section>
-    </section>
+    </LayoutApp>
 }

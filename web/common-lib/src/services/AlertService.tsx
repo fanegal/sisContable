@@ -95,7 +95,6 @@ const AlertService = {
         if (result.isConfirmed && acceptAction) acceptAction();
         if (result.isDismissed && cancelAction) cancelAction();
     },
-
     toast: async ({
         message,
         durationMs = 5000,

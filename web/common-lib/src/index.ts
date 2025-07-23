@@ -9,6 +9,9 @@ export { default as MenuItem } from './components/molecules/menu_item/MenuItem';
 export { default as SquareButton } from './components/molecules/square_button/SquareButton';
 export { default as Form } from './components/molecules/form/Form';
 export { default as DragDrop } from './components/molecules/drag_drop/DragDrop';
+export { default as CustomSwiper } from './components/molecules/swiper/CustomSwiper';
+export { default as Qr } from './components/molecules/qr/Qr';
+export { default as Progress } from './components/molecules/progress/Progress';
 
 //organisims
 export { default as Content } from './components/organisims/content/Content';
@@ -16,6 +19,9 @@ export { default as Header } from './components/organisims/header/Header';
 export { default as Layout } from './components/organisims/layout/Layout';
 export { default as Sidebar } from './components/organisims/sidebar/Sidebar';
 export { default as DynamicTable } from './components/organisims/table/DynamicTable';
+export { default as HeaderApp } from './components/organisims/headerApp/HeaderApp';
+export { default as LayoutApp } from './components/organisims/layoutApp/LayoutApp';
+export { default as SidebarApp } from './components/organisims/sidebarApp/SidebarApp';
 
 //context
 export { ThemeProvider, useTheme } from './context/ThemeContext';

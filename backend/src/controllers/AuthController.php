@@ -107,6 +107,7 @@ class AuthController {
             'lastName'=>$user[ 'last_name' ],
             'email'=>$user[ 'email' ],
             'urlImg'=>$user[ 'url_img' ],
+            'customData'=>$user[ 'custom_data' ],
             'createAt'=>$user[ 'create_at' ]
         ], 'Usuario encontrado' ) );
         return $response->withStatus( 200 )->withHeader( 'Content-Type', 'application/json' );

@@ -1,3 +1,4 @@
+import { Icon } from 'common-lib'
 import './home.scss'
 
 export default function Home() {
@@ -8,7 +9,7 @@ export default function Home() {
         <h1>Bienvenido a ARSA Software</h1>
         <p className="subtitle">Panel de administración centralizado para gestión y análisis</p>
       </div>
-
+      <Icon name="chef_hat" type='round'/>
       <div className="home-content">
         <div className="card">
           <h3>Administración Total</h3>

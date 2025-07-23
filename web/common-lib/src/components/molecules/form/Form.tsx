@@ -13,7 +13,7 @@ export default function Form({
   children = null,
   hasAction = true,
   buttonAction = () => { },
-  buttonDisable = true,
+  buttonDisable = false,
   onChangeForm = () => { },
   onBlurForm = () => { },
 }: {
@@ -63,7 +63,7 @@ export default function Form({
           type={"button"}
           disabled={buttonDisable}
           onClick={() => {
-            if (buttonAction) {
+            if (buttonAction && !buttonDisable) {
               buttonAction();
             }
           }}

@@ -80,7 +80,20 @@ export const ThemeProvider = ({
 export const useTheme = (): ThemeContextProps => {
   const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error("useTheme debe usarse dentro de un ThemeProvider");
+    console.warn("useTheme se usó fuera de ThemeProvider. Usando tema por defecto.");
+    return {
+      theme: {
+        color: "#ccc",
+        background: "#fff",
+        componentColor: "#000",
+        component: "#f0f0f0",
+        textColor: "#000", // si usas esto también
+        primary: "#007bff", // opcional
+      },
+      toggleTheme: () => {},
+      setTheme: () => {},
+      availableThemes: [],
+    };
   }
   return context;
 };

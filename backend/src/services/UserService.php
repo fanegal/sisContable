@@ -32,7 +32,8 @@ class UserService {
             }
         }
 
-        $data[ 'password' ] = password_hash( $data[ 'password' ], PASSWORD_BCRYPT );
+        //$data[ 'password' ] = password_hash( $data[ 'password' ], PASSWORD_BCRYPT );
+        $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT, ['cost' => 10]);
         $data[ 'id_company' ] = $companyId;
         $data[ 'id_user_type' ] = $admin;
         return $this->userDao->create( $data );

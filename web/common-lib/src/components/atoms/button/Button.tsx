@@ -21,11 +21,15 @@ export default function Button({
 
   return (
     <button
-      className={`olm-btn animated fadeIn ${extraClass}`}
-      onClick={onClick}
+      className={` animated fadeIn ${disabled ? 'disabled-style' : ''} ${type == 'outline' ? 'outline-style' : ''} ${extraClass} olm-btn`}
+      onClick={()=>{
+        if(!disabled){
+          onClick()
+        }
+      }}
       style={{
-        color: theme.componentColor,
-        backgroundColor: theme.component,
+        color: theme.textColorSecundary,
+        backgroundColor: theme.primary,
       }}
       type={type ?? undefined}
     >

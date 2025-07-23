@@ -3,11 +3,17 @@
   "welcome": "Bienvenido",
   "logout": "Cerrar sesión",
   "login": {
+    "title": "Inicia sesión",
+    "description": "Ingresa para gestionar el sistema",
     "username": "Usuario",
     "password": "Contraseña",
+    "ente": "Ente",
     "not-account": "¿Aún no tienes cuenta?",
-    "register": "Registrate",
-    "login": "Aceptar"
+    "register": "¿Ya tienes cuenta?",
+    "login": "Aceptar",
+    "here": "Regístrate",
+    "no-access":"Usuario|Contraseña|Ente incorrecto",
+    "select-exercise": "Selecciona el Ejercicio"
   },
   "errors": {
     "required": "Campo requerido"

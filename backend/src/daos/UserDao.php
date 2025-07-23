@@ -6,7 +6,7 @@ use App\Exceptions\BadRequestException;
 use App\Exceptions\NotFoundException;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Hash;
 class UserDao {
     public function findAll() {
         return User::all();
@@ -43,13 +43,14 @@ class UserDao {
         if (isset($data['custom_data']) && is_array($data['custom_data'])) {
             $data['custom_data'] = json_encode($data['custom_data']);
         }
-
         return User::create( $data );
     }
 
     public function findUser( string $email, string $password ): ?User {
-        $user = User::where( 'username', $email )->first();
-        //xdebug_break();
+        $user = User::where(function($query) use ($email) {
+                    $query->where('username', $email)
+                        ->orWhere('email', $email);
+                })->first();
         if ( !$user ) {
             return null;
         }
