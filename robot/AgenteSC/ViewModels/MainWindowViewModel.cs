@@ -115,12 +115,17 @@ namespace AgenteSC.ViewModels
 
         private bool CanGuardar()
         {
-            ValidaPropiedadesDestino();
-            return string.IsNullOrEmpty(ErrorMessageDestino);
+            return true;
         }
 
         private void Guardar()
         {
+            ValidaPropiedadesDestino();
+            if (!string.IsNullOrEmpty(ErrorMessageDestino))
+            {
+                return;
+            }
+
             var config = _file.ReadConfig();
             config._destino.NombreEnte = NombreEnte;
             config._destino.UsuarioBD = UsuarioBD;
@@ -132,9 +137,19 @@ namespace AgenteSC.ViewModels
         {
             ErrorMessageDestino = string.Empty; // Clear previous errors
 
+            if (string.IsNullOrEmpty(NombreEnte?.Trim()))
+            {
+                ErrorMessageDestino = "El campo 'Nombre del Ente' no puede estar vacío.";
+                return;
+            }
             if (string.IsNullOrEmpty(UsuarioBD?.Trim()))
             {
-                ErrorMessageDestino = "El campo 'Usuario' no puede estar vacío.";
+                ErrorMessageDestino = "El campo 'Usuario de la BD' no puede estar vacío.";
+                return;
+            }
+            if (string.IsNullOrEmpty(UbicacionBD?.Trim()))
+            {
+                ErrorMessageDestino = "El campo 'Ubicación de la BD' no puede estar vacío.";
                 return;
             }
         }
