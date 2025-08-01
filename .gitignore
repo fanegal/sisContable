@@ -33,3 +33,4 @@ dist-ssr
 /robot/AgenteSC/obj/
 /robot/AgenteSC/bin/
 
+/backend/env
