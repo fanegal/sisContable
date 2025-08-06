@@ -50,5 +50,13 @@ namespace AgenteSC.Services
                 return string.Empty;
             }
         }
+
+        public async Task<bool> TestConnection(string serverUrl, string username, string password)
+        {
+            var loginUrl = $"{serverUrl}/login";
+            var credentials = new { username, password };
+            var response = await PeticionPost(loginUrl, credentials);
+            return !string.IsNullOrEmpty(response);
+        }
     }
 }

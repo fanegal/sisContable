@@ -17,7 +17,9 @@ namespace AgenteSC.ViewModels
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private ConfigManager _file;
+        private readonly ApiService _apiService;
         private string _errorMessageDestino;
+        private string _errorMessageOrigen;
 
         private string _nombreEnte;
         public string NombreEnte
@@ -44,9 +46,15 @@ namespace AgenteSC.ViewModels
             get => _errorMessageDestino;
             set { _errorMessageDestino = value; OnPropertyChanged(); }
         }
+        public string ErrorMessageOrigen
+        {
+            get => _errorMessageOrigen;
+            set { _errorMessageOrigen = value; OnPropertyChanged(); }
+        }
         public ICommand GuardarCommand { get; }
         public ICommand BuscarBDCommand { get; }
         public ICommand RegistrarCommand { get; }
+        public ICommand TestCommand { get; }
 
         private string _nombreServidor;
         public string NombreServidor
@@ -82,6 +90,7 @@ namespace AgenteSC.ViewModels
         public MainWindowViewModel()
         {
             _file = new ConfigManager();
+            _apiService = new ApiService();
             var config = _file.EnsureConfigExistsAndLoad();
 
             NombreEnte = config._destino.NombreEnte;
@@ -96,14 +105,29 @@ namespace AgenteSC.ViewModels
             GuardarCommand = new RelayCommand(Guardar, CanGuardar);
             BuscarBDCommand = new RelayCommand(BuscarBD);
             RegistrarCommand = new RelayCommand(Registrar);
+            TestCommand = new RelayCommand(TestConnection);
 
             _logger = new Logger();
+            Log = _logger.ReadLog();
             _backgroundService = new BackgroundService(_file, _logger);
             _backgroundService.LogUpdated += (logContent) =>
             {
                 Log = logContent;
             };
             _backgroundService.Start();
+        }
+
+        private async void TestConnection()
+        {
+            if (string.IsNullOrEmpty(NombreServidor) || string.IsNullOrEmpty(UsuarioOrigen) || string.IsNullOrEmpty(PasswordOrigen))
+            {
+                ErrorMessageOrigen = "Por favor, complete todos los campos.";
+                return;
+            }
+
+            ErrorMessageOrigen = "Probando conexión...";
+            bool success = await _apiService.TestConnection(NombreServidor, UsuarioOrigen, PasswordOrigen);
+            ErrorMessageOrigen = success ? "Conexión exitosa." : "Error de conexión.";
         }
 
         private void BuscarBD()
@@ -168,7 +192,7 @@ namespace AgenteSC.ViewModels
 
         private void ConsultarApi()
         {
-            // This method will be implemented in the future to send the destination values to an API.
+            _logger.Log($"Se utilizará la URL '{NombreServidor}' para futuras peticiones a la API.");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
