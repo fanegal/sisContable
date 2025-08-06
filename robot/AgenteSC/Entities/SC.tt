@@ -1,0 +1,102 @@
+﻿<#@ template language="C#" debug="false" hostspecific="true" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Data" #>
+<#@ assembly name="C:\Users\Dell\source\repos\NIOV2\NOI\packages\FirebirdSql.Data.FirebirdClient.10.3.1\lib\net48\FirebirdSql.Data.FirebirdClient.dll" #>
+<#@ assembly name="System.Data.DataSetExtensions" #>
+<#@ import namespace="System" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Linq" #> 
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="FirebirdSql.Data.FirebirdClient" #>
+<#@ import namespace="System.Text" #>
+<#@ assembly name="System.Xml" #>
+
+<#
+    string connectionString = "Server=localhost;Database=C:\\Users\\Dell\\source\\repos\\NIOV2\\NOI\\NOI\\bd\\SC.FDB;User Id=SYSDBA;Password=masterkey;";
+    string query = @"
+        SELECT 
+            RDB$RELATION_FIELDS.RDB$RELATION_NAME AS TABLE_NAME, 
+            RDB$RELATION_FIELDS.RDB$FIELD_NAME AS COLUMN_NAME, 
+            RDB$FIELDS.RDB$FIELD_TYPE AS DATA_TYPE,
+            RDB$RELATION_FIELDS.RDB$NULL_FLAG 
+        FROM 
+            RDB$RELATION_FIELDS 
+            JOIN RDB$FIELDS ON RDB$RELATION_FIELDS.RDB$FIELD_SOURCE = RDB$FIELDS.RDB$FIELD_NAME 
+        WHERE 
+            RDB$RELATION_FIELDS.RDB$SYSTEM_FLAG = 0 
+        ORDER BY 
+            RDB$RELATION_FIELDS.RDB$RELATION_NAME, 
+            RDB$RELATION_FIELDS.RDB$FIELD_POSITION";
+
+    DataTable schemaTable = new DataTable();
+
+    using (FbConnection connection = new FbConnection(connectionString))
+    {
+        FbDataAdapter adapter = new FbDataAdapter(query, connection);
+        adapter.Fill(schemaTable);
+    }
+
+    var tables = new Dictionary<string, List<DataRow>>();
+
+    foreach (var row in schemaTable.AsEnumerable())
+    {
+        string tableName = row["TABLE_NAME"].ToString().Trim();
+        if (!tables.ContainsKey(tableName))
+        {
+            tables[tableName] = new List<DataRow>();
+        }
+        tables[tableName].Add(row);
+    }
+
+    string GetCSharpType(string sqlType, bool isNullable)
+    {
+        string baseType = sqlType switch
+        {
+            "7" => "short",    // SMALLINT
+            "8" => "int",      // INTEGER
+            "9" => "long",     // QUAD
+            "10" => "float",   // FLOAT
+            "12" => "DateTime",// DATE
+            "13" => "TimeSpan",// TIME
+            "14" => "string",  // CHAR
+            "16" => "decimal",    // INT64
+            "27" => "double",  // DOUBLE
+            "35" => "DateTime",// TIMESTAMP
+            "37" => "string",  // VARCHAR
+            "40" => "string",  // CSTRING
+            "261" => "byte[]", // BLOB
+            _ => "object"      // Default case
+        };
+        return isNullable && baseType != "string" && baseType != "byte[]" ? $"{baseType}?" : baseType;
+    }
+#>
+
+using System;
+
+namespace AgenteSC.Entities
+{
+<#
+    foreach (var table in tables)
+    {
+        string className = table.Key.Trim();
+#>
+    public class <#= className #>
+    {
+<#
+        foreach (var column in table.Value)
+        {
+            string columnName = column["COLUMN_NAME"].ToString().Trim();
+            string dataType = column["DATA_TYPE"].ToString().Trim();
+            bool isNullable = column["RDB$NULL_FLAG"] == DBNull.Value; // Si es null, permite NULL
+            string csharpType = GetCSharpType(dataType, isNullable);
+#>
+        public <#= csharpType #> <#= columnName #> { get; set; }
+<#
+        }
+#>
+    }
+<#
+    }
+#>
+}
