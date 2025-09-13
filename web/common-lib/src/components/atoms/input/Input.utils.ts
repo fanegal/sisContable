@@ -1,4 +1,4 @@
-import { UtilService, formatCurrency } from "../../../services/UtilService";
+import { UtilService, formatCurrency } from "./../../../services/UtilService";
 
 export function changePrice(event, inputData, setMessage, onBlur, index, isHandleBlur = false) {
   let input: any = event.target.value;

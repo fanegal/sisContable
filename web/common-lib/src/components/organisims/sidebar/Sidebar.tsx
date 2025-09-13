@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import classNames from 'classnames'
 import './sidebar.scss'
 import MenuItem from './../../..//components/molecules/menu_item/MenuItem'
+import { useNavigate } from 'react-router-dom'
 
 interface SidebarProps {
     collapsed: boolean
@@ -15,7 +16,8 @@ interface MenuItemData {
     id: number
     name: string
     icon: string
-    id_parent: number | null
+    id_parent: number | null,
+    url?: string,
     children?: MenuItemData[]
 }
 
@@ -44,7 +46,7 @@ export default function Sidebar({ collapsed, toggle, flatMenu }: SidebarProps) {
     const sidebarRef = useRef<HTMLDivElement>(null)
     const [isMobile, setIsMobile] = useState(false)
     const [expandedItems, setExpandedItems] = useState<Set<number>>(new Set())
-
+    const navigate = useNavigate()
     const treeMenu = buildMenuTree(flatMenu)
 
     const toggleExpanded = (id: number) => {
@@ -56,6 +58,8 @@ export default function Sidebar({ collapsed, toggle, flatMenu }: SidebarProps) {
     }
 
     const renderMenu = (items: MenuItemData[]): any[] => {
+        console.log(items);
+
         return items.map(item => {
             const hasChildren = item.children && item.children.length > 0
             const isExpanded = expandedItems.has(item.id)
@@ -69,7 +73,9 @@ export default function Sidebar({ collapsed, toggle, flatMenu }: SidebarProps) {
                             collapsed,
                             onClick: () => {
                                 if (hasChildren) toggleExpanded(item.id)
-                                else console.log(`Navigating to ${item.name}`)
+                                else if (item.url) {
+                                    navigate(item.url);
+                                }
                             },
                         }}
                         arrow={
@@ -128,13 +134,15 @@ export default function Sidebar({ collapsed, toggle, flatMenu }: SidebarProps) {
             <div className={classNames('logo', {
                 'collapsed-logo': collapsed
             })} onClick={toggle}>
-                <span><img src="/portales.png" alt="Portales" className='portales-desktop'/></span>
+                <span><img src="/logo.png" alt="Logo" className='portales-desktop' /></span>
                 {
                     !isMobile ? null :
-                        <img src="/portalesmini.png" alt="Portales" />
+                        <img src="/logo.png" alt="Logo" />
                 }
             </div>
-            <nav>{renderMenu(treeMenu)}
+            <nav>
+
+                {renderMenu(treeMenu)}
 
                 <div className='logout'>
                     <MenuItem

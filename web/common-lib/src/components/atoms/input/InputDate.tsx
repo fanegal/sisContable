@@ -1,4 +1,4 @@
-import { useTheme } from "./../../../context/ThemeContext";
+import { useTheme } from "../../../context/ThemeContext";
 import { InputInterface } from "../../../types/Input.types";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -29,8 +29,9 @@ export default function InputDate({
     const handleChange = (event) => {
         let rawValue = event.target.value;
 
-        rawValue = formatDateToDDMMYYYY(rawValue);
-
+        if (inputData.type === "date") {
+            rawValue = formatDateToDDMMYYYY(rawValue);
+        }
         if (rawValue.length > 0) {
             event.target.blur()
         }
@@ -45,7 +46,9 @@ export default function InputDate({
         } else {
             setLastValue(event.target.value)
         }
-        rawValue = formatDateToDDMMYYYY(rawValue);
+        if (inputData.type === "date") {
+            rawValue = formatDateToDDMMYYYY(rawValue);
+        }
         if (!inputData.noUpdate) {
             inputData.value = rawValue;
             event.target.value = rawValue;
@@ -64,24 +67,28 @@ export default function InputDate({
         let input = <></>;
         switch (inputData.forceType ? inputData.forceType : inputData.type) {
             case "date":
+            case "time":
                 input = (
                     <section>
                         {inputData.hasTopLabel && (
                             <p className="top-label" style={{
-                                color: theme.theme.textColor
+                                color: theme.theme.primary
                             }}>{t(inputData.label!)}</p>
                         )}
                         {inputData.extraLeftComponent}
                         <section className="bet">
+
                             <div
                                 className={`arsa-input film-date ${inputData.hasError ? "round-error" : ""
                                     }`}
 
                                 style={{
-                                    borderColor: theme.theme.textColor,
+                                    borderColor: theme.theme.primary,
                                     position: "relative"
                                 }}
                             >
+
+
                                 <input
                                     type={'text'}
                                     id={inputData.id}
@@ -90,7 +97,7 @@ export default function InputDate({
                                     maxLength={inputData.maxLength ? inputData.maxLength : 100}
                                     onInput={handleChange}
                                     onFocus={(event) => {
-                                        event.target.type = 'date';
+                                        event.target.type = inputData.type;
                                         event.target.showPicker();
                                     }}
                                     onBlur={(e) => {
@@ -100,7 +107,7 @@ export default function InputDate({
                                         }
                                     }}
                                     style={{
-                                        borderColor: theme.theme.textColor,
+                                        borderColor: theme.theme.primary,
                                         position: "relative"
                                     }}
                                 />

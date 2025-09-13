@@ -1,77 +1,75 @@
-import React, { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { InputInterface } from "../../../types/Input.types";
-import { useTranslation } from "react-i18next";
-import { useTheme } from "./../../../context/ThemeContext";
+import Icon from "../icon/Icon";
 
 export default function InputSelect({
-    inputData,
-    index,
-    onChange,
-    onBlur,
+  inputData,
+  index,
+  onChange = () => { },
+  onBlur = () => { },
+  onFocus = () => { },
 }: {
-    inputData: InputInterface;
-    index: number;
-    onChange: Function;
-    onBlur: Function;
+  inputData: InputInterface;
+  index: number;
+  onChange?: Function;
+  onBlur?: Function;
+  onFocus?: Function;
 }) {
-    const theme: any = useTheme();
-    const { t } = useTranslation();
-    const [selectedValue, setSelectedValue] = useState(inputData.value || "");
+  const [open, setOpen] = useState(false);
 
-    const handleChange = (event) => {
-        const value = event.target.value;
-        inputData.value = value;
-        inputData.hasError = false;
-        setSelectedValue(value);
-        onChange(inputData, index);
+  const handleSelectChange = (e: any) => {
+    console.log("Cambio de selección:");
+    console.log("Cambio de selección:", e);
+    const event = {
+      target: {
+        value: e.value,
+        label: inputData.label,
+      },
     };
+    inputData.value = e.value;
+    onChange(event, index);
+    setOpen(false);
+  };
 
-    const handleBlur = (event) => {
-        if (!inputData.noUpdate) {
-            inputData.value = event.target.value;
-            inputData.hasError = false;
-            onBlur(inputData, index);
-        } else {
-            onBlur(inputData, index);
-        }
-    };
+  return (
+    <div className={`gp-input ${inputData.extraClass || ""}`}>
+      {inputData.hasTopLabel && inputData.label && (
+        <label className="gp-input-label top-label">
+          {inputData.label}
+          {inputData.required && <span className="required">*</span>}
+        </label>
+      )}
 
-    return (
-        <section
-            className={`${inputData.globalExtraClass || ""} ${inputData.extraClass || ""} gp-form`}
-        >
-            <div className={`master-input`} style={{ width: "100%" }}>
-                {inputData.hasTopLabel && (
-                    <p className="top-label" style={{ color: theme.theme.textColor }}>
-                        {t(inputData.label!)}
-                    </p>
-                )}
-                {inputData.extraLeftComponent}
-                <select
-                    id={inputData.id}
-                    className={`arsa-input arsa-select ${inputData.hasError ? "round-error" : ""}`}
-                    value={selectedValue}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    style={{ borderColor: theme.theme.textColor }}
-                >
-                    {inputData.defaultOption && (
-                        <option value="">{t(inputData.defaultOptionLabel || "Selecciona una opción")}</option>
-                    )}
+      <div className="custom-select ">
+        <div className="select-box" onClick={() => setOpen(!open)}>
+          {inputData.value ? (
+            inputData.values?.find(option => option.value === inputData.value)?.label ?? inputData.value
+          ) : (
+            <span className="placeholder">{inputData.placeholder}</span>
+          )}
+          <div className="select-arrow">
+            <Icon name={open ? "expand_less" : "expand_more"} />
+          </div>
+        </div>
 
-                    {inputData.values?.map((option: any, idx: number) => (
-                        <option key={idx} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
-                </select>
+        {open && (
+          <ul className="select-dropdown">
+            {inputData.values!.map((option) => (
+              <li
+                key={option.value}
+                className="select-option"
+                onClick={() => handleSelectChange(option)}
+              >
+                {option.label}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
 
-                {inputData.extraComponent}
-            </div>
-
-            {inputData.required && inputData.hasError && (
-                <p className="error">{inputData.errorMessage}</p>
-            )}
-        </section>
-    );
+      {inputData.hasError && inputData.errorMessage && (
+        <div className="error">{inputData.errorMessage}</div>
+      )}
+    </div>
+  );
 }

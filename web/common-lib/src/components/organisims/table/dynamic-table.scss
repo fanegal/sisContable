@@ -82,7 +82,7 @@ table th {
 .dynamic-table {
     thead {
         tr {
-            background-color: #833177;
+            background-color: #3b6ec4;
             color: #fff;
 
             .checkbox-column {
@@ -166,7 +166,7 @@ table th {
             flex: 1;
 
             div {
-                background-color: #833177;
+                background-color: #3b6ec4;
                 color: #fff;
                 padding: 8px;
                 border: none;
@@ -199,7 +199,7 @@ table th {
             align-items: center;
             height: 34.5px;
             border-radius: 4px;
-            background: #833177;
+            background: #3b6ec4;
             outline: none;
             border: none;
             color: #fff;
@@ -248,4 +248,55 @@ table th {
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 1px 1px 1px #f2eeee;
+}
+
+.actionsss {
+    padding: 12px !important;
+    margin-top: 0;
+    display: flex;
+    width: 200px;
+    padding: 12px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+    border-radius: 16px;
+    background: #FFF;
+    box-shadow: 0 0 10px 0 rgba(73, 73, 73, 0.10);
+}
+
+.actionss {
+    display: flex;
+    padding: 8px;
+    align-items: center;
+    gap: 12px;
+    align-self: stretch;
+
+    div {
+        flex-direction: row;
+        display: flex;
+        gap: 12px;
+        cursor: pointer;
+
+        p {
+            color: var(--Primary-80, #4E17AA);
+            font-family: Nunito;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px;
+            /* 125% */
+            letter-spacing: -0.176px;
+        }
+
+        span {
+            color: var(--Primary-80, #4E17AA);
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px;
+            /* 125% */
+            letter-spacing: -0.176px;
+        }
+    }
 }

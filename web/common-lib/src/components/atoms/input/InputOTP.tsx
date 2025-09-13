@@ -1,4 +1,4 @@
-import { useTheme } from "../../../context/ThemeContext";
+import { useTheme } from "../../../context/ThemeContext";;
 import { InputInterface } from "../../../types/Input.types";
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -26,20 +26,20 @@ export default function InputOTP({
   }, [values]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, i: number) => {
-    const val = e.target.value.replace(/[^0-9]/g, "").slice(0, 1);
-    const newValues = [...values];
-    newValues[i] = val;
-    setValues(newValues);
+  const val = e.target.value.replace(/[^0-9]/g, "").slice(0, 1);
+  const newValues = [...values];
+  newValues[i] = val;
+  setValues(newValues);
 
-    if (val) {
-      const nextIndex = i + 1;
-      setTimeout(() => {
-        if (inputsRef.current[nextIndex]) {
-          inputsRef.current[nextIndex]?.focus();
-        }
-      }, 10);
-    }
-  };
+  if (val) {
+    const nextIndex = i + 1;
+    setTimeout(() => {
+      if (inputsRef.current[nextIndex]) {
+        inputsRef.current[nextIndex]?.focus();
+      }
+    }, 10); 
+  }
+};
 
   const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -76,10 +76,7 @@ export default function InputOTP({
         return (
           <input
             key={i}
-            ref={(el) => {
-              inputsRef.current[i] = el;
-            }}
-
+            ref={(el) => void (inputsRef.current[i] = el)}
             type="text"
             inputMode="numeric"
             maxLength={1}

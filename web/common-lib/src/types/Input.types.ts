@@ -1,7 +1,7 @@
 export interface InputInterface {
   value: any;
   dummyValue?: any;
-  values?: { value: string; label: string }[];
+  values?: Array<any>;
   type: string;
   forceType?: string;
   extraComponent?: any;
@@ -29,9 +29,11 @@ export interface InputInterface {
   leftPlaceholder?: string;
   rightValue?: any;
   leftValue?: any;
-
-  defaultOption?: boolean;
-  defaultOptionLabel?: string;
-  
-
+  allowedFormats?: string[];
+  maxSizeMB?: number;
+  // Propiedades para QuantityCounter
+  min?: number;
+  max?: number;
+  step?: number;
+  disabled?: boolean;
 }

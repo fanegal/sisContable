@@ -1,4 +1,4 @@
-import { useTheme } from "./../../../context/ThemeContext";
+import { useTheme } from "../../../context/ThemeContext";;
 import { InputInterface } from "../../../types/Input.types";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -65,7 +65,7 @@ export default function InputPhone({
                     >
                         {inputData.hasTopLabel && (
                             <p className="top-label" style={{
-                                color: theme.theme.textColor
+                                color: theme.theme.primary
                             }}>{t(inputData.label!)}</p>
                         )}
                         {inputData.extraLeftComponent}
@@ -99,7 +99,7 @@ export default function InputPhone({
                                 }
                             }}
                             style={{
-                                borderColor: theme.theme.textColor,
+                                borderColor: theme.theme.primary,
                                 position: "relative"
                             }}
                             pattern="[0-9]*"

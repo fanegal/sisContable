@@ -1,4 +1,6 @@
+"use client";
 
+import { useTheme } from "../../../context/ThemeContext";
 import { InputInterface } from "../../../types/Input.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -17,7 +19,7 @@ export default function InputTextarea({
   onBlur,
 }: InputTextareaProps) {
   const { t } = useTranslation();
-
+  const theme: any = useTheme();
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     inputData.value = event.target.value;
     inputData.hasError = false;
@@ -32,6 +34,12 @@ export default function InputTextarea({
 
   return (
     <div className={`master-area ${inputData.extraComponent ? "inp-icon" : ""}`}>
+      {inputData.hasTopLabel && (
+        <p className="top-label" style={{
+          color: theme.theme.primary
+        }}>{t(inputData.label!)}</p>
+      )}
+      {inputData.extraLeftComponent}
       <textarea
         id={inputData.id ?? ""}
         value={inputData.value ?? ""}
@@ -43,7 +51,6 @@ export default function InputTextarea({
         onChange={handleChange}
         onBlur={handleBlur}
         style={{
-          width: inputData.extraComponent ? "calc(100% - 40px)" : "100%",
           height: "auto",
         }}
       />

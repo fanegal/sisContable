@@ -36,8 +36,8 @@
     align-items: center;
     gap: 8px;
     justify-content: space-between;
-    height: 27px;
-    background: #833177;
+    height: 30px;
+    background: #3b6ec4;
     color: #fff;
 
     img {
@@ -47,7 +47,6 @@
 
   .collapsed-logo {
     span {
-      display: none;
     }
   }
 
@@ -67,7 +66,7 @@ nav {
   bottom: -2px;
   width: 100%;
 
-  background: #833177;
+  background: #3b6ec4;
   color: #fff;
 
   button {
@@ -75,7 +74,7 @@ nav {
   }
 
   button:hover {
-    background: #833177;
+    background: #3b6ec4;
     opacity: 0.5;
   }
 }

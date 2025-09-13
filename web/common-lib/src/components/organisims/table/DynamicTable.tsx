@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./dynamic-table.scss";
 import Icon from './../../..//components/atoms/icon/Icon';
+import { Popover } from '@mui/material';
 
 interface Column {
     key: string;
@@ -8,6 +9,12 @@ interface Column {
     visible?: boolean;
     sortable?: boolean;
     render?: (value: any, row: Record<string, any>) => React.ReactNode;
+}
+
+interface TableAction {
+    title: string;
+    action: () => void;
+    icon?: string;
 }
 
 interface DynamicTableProps {
@@ -18,6 +25,7 @@ interface DynamicTableProps {
     singleSelection?: boolean;
     keyTag?: string;
     onSelectionChange?: (selectedKeys: any[]) => void;
+    actions?: TableAction[];
 }
 
 export default function DynamicTable({
@@ -27,13 +35,36 @@ export default function DynamicTable({
     selectable = false,
     singleSelection = false,
     keyTag = 'id',
-    onSelectionChange
+    onSelectionChange,
+    actions
 }: DynamicTableProps) {
+
+    const defaultActions: TableAction[] = [
+        {
+            title: "Carga manual",
+            icon: "border_color",
+            action: () => console.log("Default: Carga manual"),
+        },
+        {
+            title: "Carga masiva",
+            icon: "delete",
+            action: () => console.log("Default: Carga masiva"),
+        },
+    ];
+
+    const tableActions = actions && actions.length > 0 ? actions : defaultActions;
     const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null);
     const [search, setSearch] = useState('');
     const [selectedKeys, setSelectedKeys] = useState<any[]>([]);
 
     const visibleColumns = columns.filter(col => col.visible !== false);
+
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const open = Boolean(anchorEl);
+
+    const handleClose = () => setAnchorEl(null);
+    const handleClick = (event: React.MouseEvent<HTMLElement>) =>
+        setAnchorEl(event.currentTarget);
 
     const sortedData = [...data].sort((a, b) => {
         if (!sortConfig) return 0;
@@ -89,7 +120,32 @@ export default function DynamicTable({
                 </section>
                 <section className='actions'>
                     <button><Icon name='filter_list' />Filtro</button>
-                    <button><Icon name='add' />Agregar</button>
+                    <button onClick={handleClick}><Icon name='add' />Agregar</button>
+
+                    <Popover
+                        open={open}
+                        anchorEl={anchorEl}
+                        onClose={handleClose}
+                        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                        transformOrigin={{ vertical: "top", horizontal: "right" }}
+                    >
+                        <section className="actionsss">
+                            {tableActions.map((act, i) => (
+                                <div className="actionss" key={i}>
+                                    <div
+                                        onClick={() => {
+                                            handleClose();
+                                            act.action();
+                                        }}
+                                    >
+                                        <Icon name={act.icon || "border_color"} type="symbols" />
+                                        <p>{act.title}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </section>
+                    </Popover>
+
                 </section>
             </section>
 

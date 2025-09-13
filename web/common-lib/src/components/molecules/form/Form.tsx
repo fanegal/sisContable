@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from "react";
 import Input from "../../atoms/input/Input";
 import "./form.scss";
@@ -16,6 +18,7 @@ export default function Form({
   buttonDisable = false,
   onChangeForm = () => { },
   onBlurForm = () => { },
+  onFocusForm = () => { },
 }: {
   data?: any;
   extraClass?: string;
@@ -28,6 +31,7 @@ export default function Form({
   buttonDisable?: boolean;
   onChangeForm?: Function;
   onBlurForm?: Function;
+  onFocusForm?: Function;
 }) {
   useEffect(() => { }, []);
 
@@ -44,9 +48,16 @@ export default function Form({
                 key={`inp-form-${index}`}
                 onBlur={(e) => {
                   if (onBlurForm) {
-                    onBlurForm(e);
+                    onBlurForm(e, index);
                   }
                 }}
+
+                onFocus={(e) => {
+                  if (onFocusForm) {
+                    onFocusForm(e, index);
+                  }
+                }}
+                
                 onChange={(e, index) => {
                   if (onChangeForm) {
                     onChangeForm(e, index);
@@ -63,7 +74,7 @@ export default function Form({
           type={"button"}
           disabled={buttonDisable}
           onClick={() => {
-            if (buttonAction && !buttonDisable) {
+            if (buttonAction) {
               buttonAction();
             }
           }}

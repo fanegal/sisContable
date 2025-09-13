@@ -37,23 +37,14 @@
   transition: border-color 0.3s ease;
 }
 
-.form-group label {
-  position: absolute;
-  left: 12px;
-  top: 12px;
-  font-size: 14px;
-  color: #777;
-  transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
-}
-
 .arsa-input {
   display: inline-block;
-  width: -webkit-fill-available ;
-  width: -webkit-fill-available ;
+  width: -webkit-fill-available;
+  width: -webkit-fill-available;
   width: -moz-available;
-  width: fill-available ; 
+  width: fill-available;
   height: 100%;
-  
+
   //background: var(--bg-ice-blue, #f1f6f9);
   -webkit-backdrop-filter: blur(22px);
   backdrop-filter: blur(22px);
@@ -69,14 +60,10 @@
   border-radius: 8px;
   margin-bottom: 16px;
   height: 20px;
-  background-color: #fff;
+
   &::placeholder {
     color: rgba(37, 45, 66, 0.5);
   }
-}
-
-.arsa-select{
-  height: 40px;
 }
 
 .secret {
@@ -605,6 +592,51 @@ select::-ms-expand {
   }
 }
 
+.rich-container {
+  border: 1px solid #4e17aa;
+  background: #ffffff;
+  border-radius: 8px;
+  padding-top: 6px;
+
+  Span {
+    font-size: 16px;
+  }
+}
+
+.rich-text-editor {
+  min-height: 120px;
+  border-radius: 0;
+  padding: 10px;
+  padding-left: 14px;
+  padding-right: 14px;
+  outline: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-y: auto;
+  max-height: 210px;
+}
+
+.maxim-characters {
+  color: #a7a7a8;
+  text-align: right;
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  /* 133.333% */
+}
+
+
+.rich-text-editor:focus {}
+
+.rich-text-editor:empty:before {
+  content: attr(data-placeholder);
+  color: #6c757d;
+  font-style: italic;
+}
+
 .icon-for-input {
   position: absolute;
   z-index: 9;
@@ -620,7 +652,7 @@ select::-ms-expand {
   max-height: 0px !important;
 }
 
-.film-date{
+.film-date {
   width: 100%;
   background-color: #fff;
 }
@@ -628,4 +660,809 @@ select::-ms-expand {
 input[type="date"]::-webkit-calendar-picker-indicator {
   display: none;
   -webkit-appearance: none;
+}
+
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  font-size: 1rem;
+  user-select: none;
+  gap: 0.5rem;
+
+  input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+
+  span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 1px solid #6723d7;
+    border-radius: 50%;
+    position: relative;
+    transition: border-color 0.2s ease;
+  }
+
+  input[type="checkbox"]:checked+span::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 2.6px;
+    width: 14px;
+    height: 14px;
+    background-color: #6723d7;
+    border-radius: 50%;
+  }
+
+  .checkbox-wrapper .circle {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #6723d7;
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    transition: border-color 0.2s ease;
+  }
+
+  .checkbox-wrapper .checkd::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 10px;
+    height: 10px;
+    background-color: #007bff; // tu color de check activo
+    border-radius: 50%;
+  }
+
+}
+
+textarea {
+  border-color: #6724d7 !important;
+  min-height: 170px;
+}
+
+.dropzone {
+  background-color: #f5eaff;
+  border: 2px dashed #a259ff;
+  border-radius: 20px;
+  //padding: 40px;
+  cursor: pointer;
+  transition: border-color 0.2s ease-in-out;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+
+  &.drag-over {
+    border-color: #7929e1;
+  }
+
+  &.error {
+    border-color: red;
+  }
+
+  .dropzone-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+
+    .material-icons {
+      font-size: 48px;
+      color: #7929e1;
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 16px;
+      color: #7929e1;
+      margin: 0;
+    }
+
+    small {
+      color: #333;
+      font-size: 12px;
+    }
+  }
+}
+
+.photo-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.photo-dropzone {
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  border: 2px dashed transparent;
+  padding: 16px;
+  border-radius: 12px;
+  position: relative;
+
+  &.error {
+    border-color: red;
+    border-radius: 50%;
+    height: 84px;
+  }
+
+  .dropzone-preview {
+    border-radius: 50% !important;
+    display: none;
+
+    img {
+      border-radius: 12px !important;
+    }
+  }
+}
+
+.photo-circle {
+  width: 80px;
+  height: 80px;
+  background: #f1ddff;
+  border: 2px solid #9b59b6;
+  border-radius: 50%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Nunito:wght@400;600;700&display=swap");
+
+.quantity-counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  max-width: 300px;
+}
+
+.quantity-btn {
+  box-shadow: none;
+  width: 86px !important;
+  height: 48px !important;
+  background-color: #efddff !important;
+  box-shadow: none !important;
+  border: 0px !important;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0px;
+
+  span {
+    font-size: 20px;
+    color: #4e17aa !important;
+  }
+
+  p {
+    font-size: 18px;
+    font-family: "Nunito", sans-serif;
+    color: #4e17aa !important;
+  }
+}
+
+.quantity-input {
+  font-family: "Nunito", sans-serif;
+  width: 80px;
+  height: 40px;
+  text-align: center;
+  border: 1px solid #4e17aa;
+  border-radius: 8px;
+  background-color: white;
+  outline: none;
+  transition: border-color 0.2s ease;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  /* 125% */
+}
+
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.select-input {
+  width: 100%;
+  height: 48px;
+  padding: 11px 13px 11px 13px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  border-radius: 8px;
+  border: 1px solid #6724d7;
+  background: #fafafa;
+
+  &:disabled {
+    background-color: #f5f5f5;
+    color: #999;
+    cursor: not-allowed;
+    border-color: #ddd;
+  }
+
+  &.round-error {
+    border-color: #ff648a;
+  }
+
+  .options {
+    border-radius: 2px;
+    border: 1px solid #4e17aa;
+  }
+}
+
+.select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #4e17aa;
+  font-size: 20px;
+  transition: transform 0.2s ease;
+}
+
+.select-input option {
+  padding: 8px 16px;
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  background-color: white;
+  color: #333;
+}
+
+.select-input option:hover {
+  background-color: #f0f0f0;
+}
+
+.select-input option:checked {
+  background-color: #4e17aa;
+  color: white;
+}
+
+.select-box {
+  border: 1px solid #a74ef5;
+  border-radius: 8px;
+  padding: 12px 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+}
+
+.placeholder {
+  color: #999;
+}
+
+.custom-select {
+  position: relative;
+  width: 320px;
+  font-family: sans-serif;
+}
+
+.select-dropdown {
+  list-style: none;
+  padding-left: 20px;
+  max-height: 300px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: -webkit-fill-available;
+  color: #4e17aa;
+  overflow-y: auto;
+  border: 1px solid #a74ef5;
+  border-radius: 16px;
+  background-color: #efddff;
+  margin-top: 8px;
+  z-index: 1000;
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  /* 133.333% */
+}
+
+.select-option {
+  padding: 12px 0px;
+  margin-right: 22px;
+  cursor: pointer;
+  border-bottom: 1px solid #4e17aa;
+}
+
+.select-option:last-child {
+  border-bottom: none;
+}
+
+.select-option:hover {
+  background-color: #f1e6ff;
+}
+
+.dropinter {
+  border: 1px solid #4e17aa;
+  border-radius: 20px;
+  padding: 16px;
+  background-color: #f5eaff;
+  height: calc(100% - 36px);
+  box-sizing: border-box;
+}
+
+.top-label,
+.gp-input-label {
+  color: #4e17aa;
+}
+
+.gp-input-label {
+  margin-bottom: 8px;
+}
+
+.rich-container {
+  margin-top: 10px;
+}
+
+.custom-select {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+/* DateSpecial.css */
+.gp-date-special {
+  width: 100%;
+}
+
+.gp-date-special .top-label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #6a35ff;
+  /* morado label */
+}
+
+/* Input base */
+.gp-date-special .date-input .MuiOutlinedInput-root {
+  border-radius: 12px;
+}
+
+.gp-date-special .date-input .MuiOutlinedInput-input::placeholder {
+  color: #bdbdbd;
+  opacity: 1;
+}
+
+/* ====== Estilos del popper/calendario ====== */
+.MuiPickersPopper-root .MuiPaper-root {
+  background: #f1dcff;
+  /* fondo lila */
+  border-radius: 16px;
+}
+
+/* Header (mes/año y flechas) */
+.MuiPickersCalendarHeader-root {
+  color: #2e2e2e;
+}
+
+.MuiPickersArrowSwitcher-button {
+  color: #6a35ff;
+}
+
+/* Días */
+.MuiPickersDay-root.Mui-selected,
+.MuiPickersYear-yearButton.Mui-selected,
+.MuiPickersMonth-monthButton.Mui-selected {
+  background: #6a35ff;
+}
+
+.MuiPickersDay-root:hover {
+  background: rgba(106, 53, 255, 0.12);
+}
+
+/* Error debajo */
+.gp-date-special .error {
+  margin-top: 6px;
+  color: #d32f2f;
+  font-size: 12px;
+}
+
+.MuiPickersInputBase-adornedEnd {
+  border-radius: 8px !important;
+  border-color: rgb(103, 36, 215) !important;
+  height: 45px !important;
+  margin-top: -2px !important;
+
+  fieldset {
+    border-color: rgb(103, 36, 215) !important;
+  }
+}
+
+.lamamalona {}
+
+/* Input (lo que pediste) */
+.time-input .MuiOutlinedInput-root {
+  position: relative;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  height: 20px;
+}
+
+.time-input .MuiOutlinedInput-notchedOutline {
+  border-color: rgb(103, 36, 215);
+}
+
+.time-input .MuiOutlinedInput-input {
+  height: 20px;
+  line-height: 20px;
+  padding: 0 12px;
+}
+
+/* ====== Popover / Paper del TimePicker ====== */
+/* El popper envuelve al paper; útil si quieres posicionar algo extra */
+.tp-popper {
+  z-index: 9999;
+}
+
+/* Fondo lila, bordes redondeados */
+.tp-paper {
+  background: #f1dcff !important;
+  border-radius: 24px !important;
+  overflow: hidden;
+}
+
+/* Asegura que el layout interno no quede transparente */
+.tp-layout {
+  background: #f1dcff !important;
+  border-radius: 24px !important;
+}
+
+/* Título del toolbar */
+.tp-toolbar .MuiTypography-root {
+  color: #2e2e2e;
+  font-weight: 700;
+}
+
+/* Reloj y selección */
+.tp-paper .MuiClockNumber-root.Mui-selected {
+  background: rgb(103, 36, 215) !important;
+  color: #fff !important;
+}
+
+.tp-paper .MuiClockPointer-root,
+.tp-paper .MuiClockPointer-thumb {
+  background-color: rgb(103, 36, 215) !important;
+}
+
+.tp-paper .MuiClockPointer-thumb {
+  border-color: rgb(103, 36, 215) !important;
+}
+
+.tp-paper .MuiClockPointer-root:before {
+  background-color: rgb(103, 36, 215) !important;
+}
+
+/* Segmento AM/PM */
+.tp-paper .MuiTimeClock-amPmSelection .MuiToggleButtonGroup-root {
+  border: 1px solid rgb(103, 36, 215);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tp-paper .MuiTimeClock-amPmSelection .MuiToggleButton-root {
+  color: #000;
+}
+
+.tp-paper .MuiTimeClock-amPmSelection .MuiToggleButton-root.Mui-selected {
+  background: #F6CDE0;
+  color: #000;
+}
+
+/* Botonera inferior (Guardar) — opcional según variant del picker */
+.tp-actions .MuiButton-root {
+  background: #5A2BB5;
+  color: #fff;
+  border-radius: 999px;
+  padding: 10px 24px;
+}
+
+.tp-actions .MuiButton-root:hover {
+  background: #4A23A1;
+}
+
+/* components/inputs/TimeSpecial.css */
+.gp-time-special .top-label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #6724d7;
+}
+
+/* Sheet */
+.ts-sheet {
+  background: #f1dcff;
+  border-radius: 24px;
+  padding: 20px;
+}
+
+.ts-title {
+  margin: 0 0 16px;
+  font-weight: 700;
+  color: #2e2e2e;
+}
+
+/* Row layout */
+.ts-row {
+  display: grid;
+  grid-template-columns: 1fr 24px 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Inputs */
+.ts-field {
+  display: grid;
+  gap: 6px;
+}
+
+.ts-input {
+  font-size: 56px;
+  line-height: 64px;
+  font-weight: 700;
+  text-align: center;
+  border: 2px solid rgba(103, 36, 215, 0.6);
+  border-radius: 16px;
+  background: #fff;
+  width: 100%;
+  padding: 8px 12px;
+}
+
+.ts-input:focus {
+  outline: none;
+  border-color: rgb(103, 36, 215);
+}
+
+.ts-help {
+  font-size: 14px;
+  color: #6b6b6b;
+}
+
+.ts-colon {
+  font-size: 56px;
+  font-weight: 900;
+  color: #2e2e2e;
+  text-align: center;
+}
+
+/* AM/PM segmented */
+.ts-ampm {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  border: 2px solid rgba(103, 36, 215, 0.6);
+  border-radius: 12px;
+  overflow: hidden;
+  width: 84px;
+}
+
+.ts-seg {
+  appearance: none;
+  border: 0;
+  background: #fff;
+  padding: 10px 0;
+  font-weight: 700;
+  color: #2e2e2e;
+  cursor: pointer;
+}
+
+.ts-seg.active {
+  background: #f6cde0;
+}
+
+.ts-save {
+  margin-top: 20px;
+  border: 0;
+  border-radius: 28px;
+  padding: 14px 28px;
+  font-weight: 800;
+  font-size: 18px;
+  color: #fff;
+  background: #6327d9;
+  cursor: pointer;
+}
+
+.ts-save:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Error */
+.gp-time-special .error {
+  margin-top: 6px;
+  color: #d32f2f;
+  font-size: 12px;
+}
+
+/* Input look to match requested border/height when used inline */
+.gp-time-special .ts-input {
+  border-color: rgb(103, 36, 215);
+}
+
+.timerr {
+  position: relative;
+}
+
+/* Panel inline que EMPUJA contenido */
+.ts-inline-sheet {
+  margin-top: 12px;
+  background: #f1dcff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .1);
+  position: absolute;
+  top: 70px;
+  z-index: 9;
+}
+
+.ts-title {
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: #2e2e2e;
+}
+
+.ts-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.ts-field {
+  flex: 1;
+  min-width: 120px;
+}
+
+.ts-input {
+  width: 100%;
+  height: 64px;
+  width: 80px;
+  border: 2px solid rgb(103, 36, 215);
+  border-radius: 14px;
+  background: #fff;
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+}
+
+.ts-colon {
+  align-self: center;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.ts-ampm {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(103, 36, 215);
+  border-radius: 12px;
+  overflow: hidden;
+  height: 82px;
+}
+
+.ts-seg {
+  border: 0;
+  padding: 8px 14px;
+  background: #fff;
+  cursor: pointer;
+  height: 41px;
+}
+
+.ts-seg.active {
+  background: #F6CDE0;
+}
+
+.ts-actions {
+  margin-top: 14px;
+  display: flex;
+  justify-content: end;
+}
+
+.ts-save {
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 22px;
+  background: #5e2ce6;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+
+  display: flex;
+  height: 48px;
+  padding: 10px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.ts-input {
+  color: var(--M3-sys-light-on-primary-container, var(--Schemes-On-Primary-Container, #4F378A));
+  text-align: center;
+  font-family: Poppins;
+  font-size: var(--Static-Display-Medium-Size, 45px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--Static-Display-Medium-Line-Height, 52px);
+  /* 115.556% */
+  letter-spacing: var(--Static-Display-Medium-Tracking, 0);
+
+
+}
+
+.ron {
+  width: -webkit-fill-available;
+}
+
+.ronli {
+  color: var(--Neutral-100, #0F0F11);
+
+  /* Body 16 poppins */
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  /* 125% */
+}
+
+.dropzone {
+  overflow: hidden;
+}
+
+.dropinter {
+  position: relative;
+}
+
+.dropzone-preview {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* opcional: fondo para contraste */
+  background: #fff;
+  border-radius: 20px 0 0 20px;
+}
+
+.dropzone-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px 0 0 20px;
+}
+
+.errorz {
+  border-color: #ec0000;
+  ;
 }

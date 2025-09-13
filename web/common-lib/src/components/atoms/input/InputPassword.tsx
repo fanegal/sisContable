@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "./../../../context/ThemeContext";
+import { useTheme } from "../../../context/ThemeContext";;
 import { InputInterface } from "../../../types/Input.types";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -10,6 +10,7 @@ interface InputPasswordProps {
   index: number;
   onChange: Function;
   onBlur: Function;
+  onFocus: Function;
 }
 
 export default function InputPassword({
@@ -17,6 +18,7 @@ export default function InputPassword({
   index,
   onChange,
   onBlur,
+  onFocus,
 }: InputPasswordProps) {
   const theme: any = useTheme();
   const { t } = useTranslation();
@@ -59,7 +61,7 @@ export default function InputPassword({
     <div className={`${inputData.extraComponent ? "inp-icon" : "secret"} ${inputData.globalExtraClass} ${inputData.extraClass} gp-form ${inputData.type == "between" ? "between-dates" : ""}`}>
       {inputData.hasTopLabel && (
         <p className="top-label" style={{
-          color: theme.theme.textColor
+          color: theme.theme.primary
         }}>{t(inputData.label!)} </p>
       )}
       {inputData.extraLeftComponent}
@@ -73,8 +75,11 @@ export default function InputPassword({
         name={inputData?.name}
         onChange={handleChange}
         onBlur={handleBlur}
+        onFocus={(e)=>{
+          onFocus(e)
+        }}
         style={{
-          borderColor: theme.theme.textColor,
+          borderColor: theme.theme.primary,
           position: "relative"
         }}
       />

@@ -12,6 +12,7 @@ export { default as DragDrop } from './components/molecules/drag_drop/DragDrop';
 export { default as CustomSwiper } from './components/molecules/swiper/CustomSwiper';
 export { default as Qr } from './components/molecules/qr/Qr';
 export { default as Progress } from './components/molecules/progress/Progress';
+export { default as Tabs } from './components/molecules/tabs/Tabs';
 
 //organisims
 export { default as Content } from './components/organisims/content/Content';
