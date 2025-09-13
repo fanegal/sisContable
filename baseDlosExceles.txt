@@ -1,0 +1,30 @@
+//titulo de obra : [nombre_del_archivo]
+//se guarda 
+encabezado:{id,fecha,nombre_del_archivo,ente,ejercicio, tipo:'obra,ingreso,gasto',estatus:'captura,cerrado,enviado,guardado'}
+//estatus -> Captura
+//[Cerrar],[abrir] {Estas seguro de que quieres terminar el proceso?}
+
+obra{
+    id:1,
+    obra:{campos},
+    contrato:{campos,fianza:[{},{},{}]},
+    estimacion:[{},{},{}],
+    anticipo:{},
+    conceptos:[{campos}],
+    contratista:{campos},
+    avanceobra:{campos}}
+}
+
+gasto{
+    id:2,
+    Deudores:[{},{}],
+    Cancelados:[{},{}],
+    Gastos:[{},{}]
+}
+
+Ingresos{
+    id:3,
+    predial:[{},{}],
+    RegistroCivil:[{},{}],
+    Constacias:[{},{}]
+}
