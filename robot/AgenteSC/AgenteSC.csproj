@@ -19,9 +19,30 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.66" />
+    <PackageReference Include="FirebirdSql.Data.FirebirdClient" Version="10.3.3" />
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="2.0.1" />
     <PackageReference Include="MahApps.Metro" Version="2.4.10" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Entities\SC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SC.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Entities\SC.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SC.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

@@ -11,13 +11,14 @@
         Title="Agente"
         WindowStartupLocation="CenterScreen"
         DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}"
-        Height="400" Width="600" StateChanged="MetroWindow_StateChanged">
+        Height="425" Width="600" StateChanged="MetroWindow_StateChanged">
 
     <Grid>
         <Controls:MetroTabControl BorderThickness="1" BorderBrush="Gray" TabStripPlacement="Top" FontSize="16" Padding="10">
             <TabItem Header="Destino">
                 <Grid Background="{DynamicResource WindowBackgroundBrush}" Margin="20">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -79,7 +80,11 @@
                     </StackPanel>
 
                     <!-- Error Messages TextBlock -->
-                    <TextBlock  Text="{Binding ErrorMessageDestino}" Foreground="Red" Margin="0,5,0,5"/>
+                    <StackPanel Grid.Row="5" HorizontalAlignment="Left" Margin="10,20,0,0">
+                        <TextBlock  Text="{Binding ErrorMessageDestino}" Foreground="Red" Margin="0,5,0,5"/>
+                    </StackPanel>
+                   
+                   
 
                 </Grid>
             </TabItem>
@@ -91,20 +96,25 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <!-- Campo Nombre del Servidor -->
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,10,0,10">
                         <TextBlock Text="Nombre del Servidor:" Width="150" VerticalAlignment="Center"/>
-                        <TextBox Width="250"/>
-                        <Button Content="Test Conexión" Margin="10,0,0,0"/>
+                        <TextBox
+                            Width="250"
+                            Text="{Binding NombreServidor, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Content="Test Conexión" Margin="10,0,0,0" Command="{Binding TestCommand}"/>
                     </StackPanel>
 
                     <!-- Campo Usuario -->
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,10,0,10">
                         <TextBlock Text="Usuario:" Width="150" VerticalAlignment="Center"/>
-                        <TextBox Width="250"/>
+                        <TextBox
+                            Width="250"
+                            Text="{Binding UsuarioOrigen, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <!-- Campo Contraseña -->
@@ -116,20 +126,34 @@
                     <!--log -->
                     <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,10,0,10">
                         <TextBlock Text="Log:" Width="150" VerticalAlignment="Center"/>
-                        <TextBox Width="250"/>
+                        <TextBox
+                            Width="250"
+                            Text="{Binding Log, UpdateSourceTrigger=PropertyChanged}"/>
 
                     </StackPanel>
 
                     <!-- Botón Guardar -->
                     <StackPanel Grid.Row="4" HorizontalAlignment="Right" Margin="10,20,0,0">
-                        <Button Content="Registrar" Width="100"/>
+                        <Button
+                            Content="Registrar"
+                            Command="{Binding RegistrarCommand}"
+                            Width="100"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" HorizontalAlignment="Left" Margin="10,20,0,0">
+                        <TextBlock  Text="{Binding ErrorMessageOrigen}" Foreground="Red" Margin="0,5,0,5"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
 
             <TabItem Header="Servicio">
                 <Grid Background="{DynamicResource WindowBackgroundBrush}">
-                    <!-- Aquí puedes definir la estructura de Servicio -->
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <TextBlock
+                            Text="{Binding Log, Mode=OneWay}"
+                            Margin="10"
+                            TextWrapping="Wrap"/>
+                    </ScrollViewer>
                 </Grid>
             </TabItem>
         </Controls:MetroTabControl>
