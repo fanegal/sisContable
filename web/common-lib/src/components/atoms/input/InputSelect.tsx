@@ -1,6 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import { InputInterface } from "../../../types/Input.types";
 import Icon from "../icon/Icon";
+import { useTheme } from "../../../context/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 export default function InputSelect({
   inputData,
@@ -16,7 +18,8 @@ export default function InputSelect({
   onFocus?: Function;
 }) {
   const [open, setOpen] = useState(false);
-
+  const theme: any = useTheme();
+  const { t } = useTranslation();
   const handleSelectChange = (e: any) => {
     console.log("Cambio de selección:");
     console.log("Cambio de selección:", e);
@@ -33,11 +36,10 @@ export default function InputSelect({
 
   return (
     <div className={`gp-input ${inputData.extraClass || ""}`}>
-      {inputData.hasTopLabel && inputData.label && (
-        <label className="gp-input-label top-label">
-          {inputData.label}
-          {inputData.required && <span className="required">*</span>}
-        </label>
+      {inputData.hasTopLabel && (
+        <p className="top-label" style={{
+          color: theme.theme.primary
+        }}>{t(inputData.label!)}</p>
       )}
 
       <div className="custom-select ">

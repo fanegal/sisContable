@@ -725,13 +725,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 textarea {
-  border-color: #6724d7 !important;
+  border-color: #3b6ec4 !important;
   min-height: 170px;
 }
 
 .dropzone {
   background-color: #f5eaff;
-  border: 2px dashed #a259ff;
+  border: 2px dashed #3b6ec4;
   border-radius: 20px;
   //padding: 40px;
   cursor: pointer;
@@ -901,7 +901,7 @@ textarea {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
   border-radius: 8px;
-  border: 1px solid #6724d7;
+  border: 1px solid #3b6ec4;
   background: #fafafa;
 
   &:disabled {
@@ -1198,7 +1198,7 @@ textarea {
 .gp-time-special .top-label {
   margin-bottom: 6px;
   font-weight: 600;
-  color: #6724d7;
+  color: #3b6ec4;
 }
 
 /* Sheet */

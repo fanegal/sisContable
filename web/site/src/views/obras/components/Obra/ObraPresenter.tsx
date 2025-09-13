@@ -1,0 +1,77 @@
+import { Content, Tabs } from "common-lib";
+import "../../obras.scss";
+import { useRef, useState } from "react";
+
+export const FORM_OBRA = [
+    {
+        type: "text",
+        value: "",
+        label: "Ubicación",
+        placeholder: "Calle Metepec #509",
+        id: "location",
+        required: true,
+        hasTopLabel: true,
+        hasError: false,
+        error: "invite.errors.name",
+        globalExtraClass: "location-input",
+    },
+    {
+        type: "select",
+        value: "",
+        label: "Tipo de obra",
+        placeholder: "Selecciona un tipo de obra",
+        id: "tipoObra",
+        required: true,
+        hasTopLabel: true,
+        hasError: false,
+        error: "invite.errors.name",
+        globalExtraClass: "tipo-input",
+        values: [
+            { label: "Nueva", value: "Nueva" },
+            { label: "Ampliación", value: "Ampliación" },
+            { label: "Proceso", value: "Proceso" },
+            { label: "Rehabilitación", value: "Rehabilitación" },
+        ],
+    },
+    {
+        type: "text",
+        value: "",
+        label: "Oficio de asignación",
+        placeholder: "MTP/TES-2019004",
+        id: "location",
+        required: true,
+        hasTopLabel: true,
+        hasError: false,
+        error: "invite.errors.name",
+        globalExtraClass: "location-input",
+    },
+    {
+        type: "select",
+        value: "",
+        label: "Modalidad de ejecución",
+        placeholder: "Modalidad de ejecución",
+        id: "modalidad",
+        required: true,
+        hasTopLabel: true,
+        hasError: false,
+        error: "invite.errors.name",
+        globalExtraClass: "modalidad-input",
+        values: [
+            { label: "Administración directa", value: "Administración directa" },
+            { label: "Contrato", value: "Contrato" },
+            { label: "Convenio", value: "Convenio" },
+        ],
+    },
+];
+
+export function useObraPresenter() {
+
+    const [form, setForm] = useState(FORM_OBRA);
+    const formRef = useRef(new Date().getTime());
+
+    return {
+        form,
+        setForm,
+        formRef,
+    }
+}

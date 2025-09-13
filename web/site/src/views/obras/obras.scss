@@ -1,7 +1,76 @@
-.tabs-obras{
-    .tabs-header{
-            justify-content: left;
-    width: 100%;
-    padding-left: 110px;
+.tabs-obras {
+    height: calc(100vh - 120px);
+
+    .tabs-header {
+        justify-content: left;
+        width: 100%;
+        padding-left: 110px;
+    }
+
+    .tabs-content-wrapper {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 1px 1px 4px #333;
+        padding: 16px;
+
+        .tabs-content-panel {
+            height: auto;
+            position: relative;
+        }
+    }
+}
+
+.add-section {
+    cursor: pointer;
+    color: var(--Primary-80, #4E17AA);
+    font-family: Nunito;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    gap: 8px;
+
+}
+
+.add-section2 {
+    cursor: pointer;
+    color: var(--Primary-80, #4E17AA);
+    font-family: Nunito;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 16px;
+    gap: 8px;
+}
+
+.cover-form {
+    .obra-form>div {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+        align-items: end;
+
+        section {
+            max-height: 78px;
+        }
+    }
+}
+
+@media (max-width:920px) {
+    .cover-form {
+        .obra-form>div {
+            grid-template-columns: 1fr;
+            gap: 4px;
+        }
     }
 }

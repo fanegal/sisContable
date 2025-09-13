@@ -4,7 +4,7 @@ import { useObrasPresenter } from "./ObrasPresenter";
 import { ObraTransactions } from "./components/ObraTransactions/ObraTransactions";
 export default function Obras({ }) {
 
-    const { onSubmit, renderOperations, setRenderOperations } = useObrasPresenter();
+    const { onSubmit, renderOperations, setRenderOperations, columns } = useObrasPresenter();
 
     return <Content>
 
@@ -13,13 +13,9 @@ export default function Obras({ }) {
             singleSelection={true}
             moduleTitle="Obras"
             keyTag="email"
-            columns={[
-                { key: 'name', label: 'Nombre', sortable: true },
-                { key: 'email', label: 'Correo', sortable: true },
-                { key: 'phone', label: 'Teléfono', render: val => <a href={`tel:${val}`}>{val}</a>, sortable: true }
-            ]}
+            columns={columns}
             data={[
-                { name: 'Ana', email: 'ana@mail.com', phone: '123456789' },
+                { date: '20/12/Dic', fileName: 'Obras.xlsx', status: 'Capturado' },
                 { name: 'Luis', email: 'luis@mail.com', phone: '987654321' }
             ]}
             onSelectionChange={(selected) => {
