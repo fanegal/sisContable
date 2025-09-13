@@ -194,56 +194,6 @@ export function useLoginPresenter() {
     }
 
     async function onSubmit() {
-        AlertService.showWithComponent({
-                            title: t("login.select-exercise"),
-                            component: <section className="exercise">
-                                <Form
-                                    data={[
-
-                                        {
-                                            type: "select",
-                                            value: null,
-                                            label: "login.ente",
-                                            placeholder: "Supervisor",
-                                            id: "ejercicio",
-                                            required: true,
-                                            hasTopLabel: true,
-                                            hasError: false,
-                                            maxLength: 10,
-                                            values: Array.from({ length: 5 }, (_, i) => {
-                                                const year = new Date().getFullYear() - 4 + i;
-                                                return { label: year, value: year };
-                                            }),
-                                            error: "invite.errors.name",
-                                            globalExtraClass: "invite-input",
-                                            defaultOption: true,
-                                            extraLeftComponent: (
-                                                <div className="custom-icon-left" style={{
-                                                    background: theme.theme.color
-                                                }}>
-
-                                                    <span className="material-symbols-outlined" style={{
-                                                        color: theme.theme.primary
-                                                    }}>calendar_today</span>
-                                                </div>
-                                            ),
-                                        },
-                                    ]}
-                                    form={formRef2}
-                                    hasAction={true}
-                                    buttonAction={() => {
-                                    }}
-                                    buttonDisable={false}
-                                    buttonText={t("login.login")}
-                                    extraClass={"about-form"}
-                                    onChangeForm={(e, index) => {
-                                    }}
-                                    onBlurForm={(e) => {
-                                    }}
-                                ></Form>
-                            </section>,
-                            cssClass:"selected-exercise"
-                        });
         let loginForm = [...form]
         let errors: number = 0;
         let updatedForm = form.map((item: any) => {
@@ -336,7 +286,8 @@ export function useLoginPresenter() {
                                     onBlurForm={(e) => {
                                     }}
                                 ></Form>
-                            </section>
+                            </section>,
+                            cssClass:"selected-exercise"
                         });
                     }, 800);
                 } else {
