@@ -1,6 +1,6 @@
 {
   "name": "common-lib",
-  "version": "1.0.83",
+  "version": "1.0.91",
   "type": "module",
   "types": "./dist/index.d.ts",
   "main": "./build/CommonLib.umd.js",
