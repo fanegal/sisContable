@@ -62,6 +62,30 @@ export const FORM_OBRA = [
             { label: "Convenio", value: "Convenio" },
         ],
     },
+    {
+        type: "price",
+        value: "",
+        label: "Costo con descuento",
+        placeholder: "$ Precio con cupón aplicado",
+        id: "field4",
+        required: true,
+        hasTopLabel: true,
+        hasError: false,
+        error: "invite.errors.name",
+        globalExtraClass: "register-input",
+    },
+    {
+        type: "date-special",
+        value: "",
+        label: "Fecha de finalización",
+        placeholder: "00 / 00 / 0000",
+        id: "field6",
+        required: true,
+        hasTopLabel: true,
+        hasError: false,
+        error: "invite.errors.name",
+        globalExtraClass: "register-input",
+    },
 ];
 
 export function useObraPresenter() {
