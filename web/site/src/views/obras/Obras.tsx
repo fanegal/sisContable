@@ -30,8 +30,8 @@ export default function Obras({ }) {
                     },
                 },
                 {
-                    title: "Editar cupón",
-                    icon: "delete",
+                    title: "Carga masiva",
+                    icon: "border_color",
                     action: () => console.log("Editar"),
                 },
             ]}
