@@ -1,9 +1,9 @@
-import {Icon} from "common-lib";
-import { useState } from "react";
+import { Icon } from "common-lib";
+import { useEffect, useState } from "react";
 
 export function useIngresosPresenter() {
 
-    const[renderOperations,setRenderOperations] = useState(false);
+    const [renderOperations, setRenderOperations] = useState(false);
 
     const columns = [
         { key: 'date', label: 'Fecha', sortable: true },
@@ -22,6 +22,17 @@ export function useIngresosPresenter() {
     function onSubmit() {
         console.log("click demo");
     }
+
+    useEffect(() => {
+        let search: any = document.getElementsByClassName("search-content");
+        if (search) {
+            console.log(search[0].children[1].children[0]);
+
+            if (search[0].children[1].children?.length > 1) {
+                search[0].children[1].children[0].remove()
+            }
+        }
+    }, []);
 
     return {
         onSubmit,

@@ -6,9 +6,8 @@ export default function Obras({ }) {
 
     const { onSubmit, renderOperations, setRenderOperations, columns } = useObrasPresenter();
 
-    return <Content>
-
-        {renderOperations ? <ObraTransactions /> : <DynamicTable
+    return <div className="gral-content">
+        {renderOperations ? <ObraTransactions setRenderOperations={setRenderOperations} /> : <DynamicTable
             selectable={true}
             singleSelection={true}
             moduleTitle="Obras"
@@ -36,5 +35,5 @@ export default function Obras({ }) {
                 },
             ]}
         />}
-    </Content>
+    </div>
 }

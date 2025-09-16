@@ -2,11 +2,12 @@ import { Content, DynamicTable, Tabs } from "common-lib";
 import "./ingresos.scss";
 import { useIngresosPresenter } from "./IngresosPresenter";
 import { IngresosTransactions } from "./components/IngresosTransactions/IngresosTransactions";
+import { Fragment } from "react/jsx-runtime";
 export default function Ingresos({ }) {
 
     const { onSubmit, renderOperations,setRenderOperations, columns } = useIngresosPresenter();
 
-    return <Content>
+    return <div className="gral-content">
     
             {renderOperations ? <IngresosTransactions /> : <DynamicTable
                 selectable={true}
@@ -36,5 +37,5 @@ export default function Ingresos({ }) {
                     },
                 ]}
             />}
-        </Content>
+        </div>
 }

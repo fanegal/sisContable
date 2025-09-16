@@ -26,6 +26,8 @@ interface DynamicTableProps {
     keyTag?: string;
     onSelectionChange?: (selectedKeys: any[]) => void;
     actions?: TableAction[];
+    singleAction?: Function;
+    singleActionText?: string;
 }
 
 export default function DynamicTable({
@@ -36,7 +38,9 @@ export default function DynamicTable({
     singleSelection = false,
     keyTag = 'id',
     onSelectionChange,
-    actions
+    actions,
+    singleAction,
+    singleActionText = "Agregar"
 }: DynamicTableProps) {
 
     const defaultActions: TableAction[] = [
@@ -120,7 +124,14 @@ export default function DynamicTable({
                 </section>
                 <section className='actions'>
                     <button><Icon name='filter_list' />Filtro</button>
-                    <button onClick={handleClick}><Icon name='add' />Agregar</button>
+                    <button onClick={(e: any) => {
+                        if (!singleAction) {
+                            handleClick(e);
+                            e.stopPropagation();
+                        } else {
+                            singleAction();
+                        }
+                    }}><Icon name='add' />{singleActionText ?? 'Agregar'}</button>
 
                     <Popover
                         open={open}

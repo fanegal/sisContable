@@ -51,6 +51,15 @@ $app->group('/user', function($group) {
     $group->post('/bulk-upload', [UserController::class, 'bulkUpload']);
 })->add(new AuthMiddleware());
 
+$app->group('/modulos-contables', function($group) {
+    $group->get('', [UserController::class, 'getAll']);
+    $group->get('/{id}', [UserController::class, 'getById']);
+    $group->post('', [UserController::class, 'create']);
+    $group->put('', [UserController::class, 'update']);
+    $group->delete('', [UserController::class, 'deleteBulk']);
+    $group->post('/bulk-upload', [UserController::class, 'bulkUpload']);
+})->add(new AuthMiddleware());
+
 // Middleware de errores global
 $customErrorHandler = new CustomErrorHandler(
     $app->getCallableResolver(),

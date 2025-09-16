@@ -1,6 +1,7 @@
 import { Content, Tabs } from "common-lib";
 import "../../obras.scss";
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const FORM_OBRA = [
     {
@@ -92,10 +93,17 @@ export function useObraPresenter() {
 
     const [form, setForm] = useState(FORM_OBRA);
     const formRef = useRef(new Date().getTime());
+    const navigate = useNavigate();
+
+    function onAccept(){
+
+    }
 
     return {
         form,
         setForm,
         formRef,
+        onAccept,
+        navigate
     }
 }

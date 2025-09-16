@@ -1,8 +1,8 @@
-import { Content, Form, Icon, Tabs } from "common-lib";
+import { Button, Content, Form, Icon, Tabs } from "common-lib";
 import { useRCPresenter } from "./RCPresenter";
 import "../../../ingresos.scss";
 
-export function RC({ }) {
+export function RC({ setRenderOperations }) {
     const { form, formRef } = useRCPresenter();
 
     return <section className="Obra">
@@ -21,6 +21,13 @@ export function RC({ }) {
                 onBlurForm={(e, index) => { }}
                 onFocusForm={(e, index) => { }}
             />
+
+            <div className="actions-form">
+                <Button onClick={() => {
+                    setRenderOperations(false)
+                }}>Regresar</Button>
+
+            </div>
         </div>
 
     </section>

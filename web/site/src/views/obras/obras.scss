@@ -7,17 +7,6 @@
         padding-left: 110px;
     }
 
-    .tabs-content-wrapper {
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 1px 1px 4px #333;
-        padding: 16px;
-
-        .tabs-content-panel {
-            height: auto;
-            position: relative;
-        }
-    }
 }
 
 .add-section {
@@ -64,6 +53,24 @@
             max-height: 78px;
         }
     }
+}
+
+.actions-form {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+
+    button {
+        max-width: 140px !important;
+        background-color: #0d4bb0 !important;
+    }
+}
+
+.return-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
 }
 
 @media (max-width:920px) {
