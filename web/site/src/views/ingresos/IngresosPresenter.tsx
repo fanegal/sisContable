@@ -1,9 +1,9 @@
-import {Icon} from "common-lib";
-import { useState } from "react";
+import { Icon } from "common-lib";
+import { useEffect, useState } from "react";
 
 export function useIngresosPresenter() {
 
-    const[renderOperations,setRenderOperations] = useState(false);
+    const [renderOperations, setRenderOperations] = useState(false);
 
     const columns = [
         { key: 'date', label: 'Fecha', sortable: true },

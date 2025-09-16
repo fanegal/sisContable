@@ -2,6 +2,7 @@ import type { TabsRef } from "node_modules/common-lib/dist/components/molecules/
 import { useMemo, useRef } from "react";
 import { Estimacion } from "../Estimacion/Estimacion";
 import { Obra } from "../Obra/Obra";
+import { Conceptos } from "../Conceptos/Conceptos";
 
 export function useObrasTransactionsPresenter() {
     const tabsRef = useRef<TabsRef>(null);
@@ -33,7 +34,7 @@ export function useObrasTransactionsPresenter() {
     {
         id: "d",
         label: "Conceptos",
-        component: <>Maqueta Conceptos</>,
+        component: <Conceptos/>,
     },
     /* {
         id: "e",

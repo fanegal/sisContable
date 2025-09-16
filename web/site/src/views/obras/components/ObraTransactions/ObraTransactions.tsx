@@ -1,6 +1,7 @@
 import { Content, Icon, Tabs } from "common-lib";
 import { useObrasTransactionsPresenter } from "./ObraTransactionsPresenter";
 import "../../obras.scss";
+import { Fragment } from "react/jsx-runtime";
 
 export function ObraTransactions({ setRenderOperations }) {
     const { obrasData } = useObrasTransactionsPresenter();
