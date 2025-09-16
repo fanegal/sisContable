@@ -7,22 +7,26 @@ export default function App() {
   const location = useLocation();
 
   useEffect(() => {
-    const parts = location.pathname.split("/").filter(Boolean);
-    let url = parts.pop() ?? "";
-    url = url ? url.charAt(0).toUpperCase() + url.slice(1) : "";
+    try {
+      const parts = location.pathname.split("/").filter(Boolean);
+      let url = parts.pop() ?? "";
+      url = url ? url.charAt(0).toUpperCase() + url.slice(1) : "";
 
-    let el: any = document.querySelector(".search-input") as HTMLInputElement | null;
-    if (el) {
-      const p = document.createElement("p");
-      p.className = "title-paragraph";
-      p.textContent = url;
-      el.replaceWith(p);
-    } else {
-      el = document.querySelector(".title-paragraph") as HTMLInputElement | null;
-      const p2 = document.createElement("p");
-      p2.className = "title-paragraph";
-      p2.textContent = url;
-      el.replaceWith(p2);
+      let el: any = document.querySelector(".search-input") as HTMLInputElement | null;
+      if (el) {
+        const p = document.createElement("p");
+        p.className = "title-paragraph";
+        p.textContent = url;
+        el.replaceWith(p);
+      } else {
+        el = document.querySelector(".title-paragraph") as HTMLInputElement | null;
+        const p2 = document.createElement("p");
+        p2.className = "title-paragraph";
+        p2.textContent = url;
+        el.replaceWith(p2);
+      }
+    } catch (error) {
+
     }
   }, [location.pathname]);
 

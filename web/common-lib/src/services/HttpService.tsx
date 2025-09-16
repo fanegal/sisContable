@@ -9,11 +9,18 @@ export class HttpService {
   private basePath: string;
   private tokenProvider?: TokenProvider;
   private isBearer?: boolean;
+  private returnFullResponse: boolean;
 
-  constructor(basePath: string, tokenProvider?: TokenProvider, isBearer?: boolean) {
+  constructor(
+    basePath: string,
+    tokenProvider?: TokenProvider,
+    isBearer?: boolean,
+    returnFullResponse: boolean = false 
+  ) {
     this.basePath = basePath;
     this.tokenProvider = tokenProvider;
     this.isBearer = isBearer;
+    this.returnFullResponse = returnFullResponse;
   }
 
   private async createHeaders(headers: any = {}): Promise<any> {
@@ -22,7 +29,9 @@ export class HttpService {
     if (this.tokenProvider) {
       const token = await this.tokenProvider.getToken();
       if (token) {
-        finalHeaders["Authorization"] = `${this.isBearer ? "Bearer" : ""} ${token}`;
+        finalHeaders["Authorization"] = this.isBearer
+          ? `Bearer ${token}`
+          : token;
       }
     }
 
@@ -35,34 +44,39 @@ export class HttpService {
     data: any = {},
     headers: any = {},
     config: AxiosRequestConfig = {}
-  ): Promise<AxiosResponse> {
+  ): Promise<any> {
     try {
       const finalHeaders = await this.createHeaders(headers);
-      let response: any = await axios({
+      let response: AxiosResponse = await axios({
         method,
         url: `${this.basePath}${path}`,
         data,
         headers: finalHeaders,
-        ...config
+        ...config,
       });
-      return response.data;
+
+      return this.returnFullResponse ? response : response.data;
     } catch (err: any) {
       if (err.response && err.response.status === 401 && this.tokenProvider) {
         console.warn("401 detected, refreshing token...");
         await this.tokenProvider.refreshToken();
+
         try {
           const finalHeadersRetry = await this.createHeaders(headers);
-          return await axios({
+          const retryResponse: AxiosResponse = await axios({
             method,
             url: `${this.basePath}${path}`,
             data,
             headers: finalHeadersRetry,
-            ...config
+            ...config,
           });
+
+          return this.returnFullResponse ? retryResponse : retryResponse.data;
         } catch (retryErr: any) {
-          return retryErr;
+          return retryErr?.response ?? retryErr;
         }
       }
+
       return err?.response?.data ?? {};
     }
   }

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import "./dynamic-table.scss";
-import Icon from './../../..//components/atoms/icon/Icon';
 import { Popover } from '@mui/material';
+import React, { useState } from 'react';
+import Icon from './../../..//components/atoms/icon/Icon';
+import "./dynamic-table.scss";
 
 interface Column {
     key: string;
@@ -28,6 +28,7 @@ interface DynamicTableProps {
     actions?: TableAction[];
     singleAction?: Function;
     singleActionText?: string;
+    emptyText?: string; 
 }
 
 export default function DynamicTable({
@@ -40,7 +41,8 @@ export default function DynamicTable({
     onSelectionChange,
     actions,
     singleAction,
-    singleActionText = "Agregar"
+    singleActionText = "Agregar",
+    emptyText = "Sin registros" // 🔹 Default
 }: DynamicTableProps) {
 
     const defaultActions: TableAction[] = [
@@ -51,7 +53,7 @@ export default function DynamicTable({
         },
         {
             title: "Carga masiva",
-            icon: "delete",
+            icon: "upload",
             action: () => console.log("Default: Carga masiva"),
         },
     ];
@@ -156,7 +158,6 @@ export default function DynamicTable({
                             ))}
                         </section>
                     </Popover>
-
                 </section>
             </section>
 
@@ -174,25 +175,33 @@ export default function DynamicTable({
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredData.map((row, idx) => (
-                            <tr key={idx}>
-                                {selectable && (
-                                    <td className="checkbox-column">
-                                        <input
-                                            type={singleSelection ? 'radio' : 'checkbox'}
-                                            name="table-selection"
-                                            checked={selectedKeys.includes(row[keyTag])}
-                                            onChange={() => toggleSelection(row[keyTag])}
-                                        />
-                                    </td>
-                                )}
-                                {visibleColumns.map(col => (
-                                    <td key={col.key}>
-                                        {col.render ? col.render(row[col.key], row) : row[col.key]}
-                                    </td>
-                                ))}
+                        {filteredData.length === 0 ? (
+                            <tr>
+                                <td colSpan={visibleColumns.length + (selectable ? 1 : 0)} className="empty-row">
+                                    {emptyText}
+                                </td>
                             </tr>
-                        ))}
+                        ) : (
+                            filteredData.map((row, idx) => (
+                                <tr key={idx}>
+                                    {selectable && (
+                                        <td className="checkbox-column">
+                                            <input
+                                                type={singleSelection ? 'radio' : 'checkbox'}
+                                                name="table-selection"
+                                                checked={selectedKeys.includes(row[keyTag])}
+                                                onChange={() => toggleSelection(row[keyTag])}
+                                            />
+                                        </td>
+                                    )}
+                                    {visibleColumns.map(col => (
+                                        <td key={col.key}>
+                                            {col.render ? col.render(row[col.key], row) : row[col.key]}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))
+                        )}
                     </tbody>
                 </table>
             </section>

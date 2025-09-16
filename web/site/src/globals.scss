@@ -620,3 +620,28 @@ body::-webkit-scrollbar-thumb {
   color: #fff;
   font-size: 20px;
 }
+
+.action-table-btn-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.action-btn-table {
+  background-color: #3b6ec4;
+  border: none;
+  outline: none;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  span{
+    font-size: 18px;
+  }
+}

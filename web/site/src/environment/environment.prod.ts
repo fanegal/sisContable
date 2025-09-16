@@ -9,10 +9,13 @@ export const themes = {
   },
 };
 
-export const basePath = "http://localhost:8000";
+//export const basePath = "http://localhost:8000";
+export const basePath = "https://www.olamsys.com/arsa-admin";
 
 export const environment = {
   tokenPath: `/auth/token`,
+  updateToken: `/auth/updateToken`,
   login: `/user/login`,
-  getUsersByPagination: `/user/paginated`
+  getUsersByPagination: `/user/paginated`,
+  getModulosContablesByPagination: `/modulos-contables/paginated`,
 };
