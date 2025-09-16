@@ -6,7 +6,8 @@ import "./login.scss";
 export default function Login() {
     const { form, formRef, t, toggleForm, onSubmit, swiperData, goRegister } = useLoginPresenter();
 
-    return <LayoutApp logoSrc="/arsa-light-alpha.png" extraClass="login-layout">
+    //return <LayoutApp logoSrc="/arsa-light-alpha.png" extraClass="login-layout">
+    return <LayoutApp extraClass="login-layout">
         <section className="login">
             <CustomSwiper
                 title="Destacados"
