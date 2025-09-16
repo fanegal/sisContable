@@ -9,7 +9,7 @@ use Slim\Middleware\ErrorMiddleware;
 use App\Middleware\CustomErrorHandler;
 
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../src/config/Database.php';
+require __DIR__ . '/../src/Config/Database.php';
 
 $app = AppFactory::create();
 
