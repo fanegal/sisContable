@@ -8,7 +8,7 @@ export default function Obras({ }) {
 
     return <Content>
 
-        {renderOperations ? <ObraTransactions /> : <DynamicTable
+        {renderOperations ? <ObraTransactions setRenderOperations={setRenderOperations}/> : <DynamicTable
             selectable={true}
             singleSelection={true}
             moduleTitle="Obras"

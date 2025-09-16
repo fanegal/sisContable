@@ -1,7 +1,6 @@
-import React, { MouseEventHandler } from "react";
-import "./button.scss";
-import {angularize} from "react-in-angularjs";
+import { MouseEventHandler } from "react";
 import { useTheme } from "../../../context/ThemeContext";
+import "./button.scss";
 
 export default function Button({
   extraClass = "",
