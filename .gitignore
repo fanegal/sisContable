@@ -28,9 +28,8 @@ dist-ssr
 *.sw?
 .env
 
-/backend/vendor
+
 /robot/AgenteSC/.vs/
 /robot/AgenteSC/obj/
-/robot/AgenteSC/bin/
-
-/backend/env
+/robot/AgenteSC/bin/ 
+/backend/env/
