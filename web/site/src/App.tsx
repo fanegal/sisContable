@@ -11,18 +11,18 @@ export default function App() {
     let url = parts.pop() ?? "";
     url = url ? url.charAt(0).toUpperCase() + url.slice(1) : "";
 
+    const p = document.createElement("p");
+    p.className = "title-paragraph";
+    p.textContent = url;
+
     let el: any = document.querySelector(".search-input") as HTMLInputElement | null;
-    if (el) {
-      const p = document.createElement("p");
-      p.className = "title-paragraph";
-      p.textContent = url;
+    if (el) { 
       el.replaceWith(p);
     } else {
       el = document.querySelector(".title-paragraph") as HTMLInputElement | null;
-      const p2 = document.createElement("p");
-      p2.className = "title-paragraph";
-      p2.textContent = url;
-      el.replaceWith(p2);
+      if(el){
+      el.replaceWith(p);
+      }
     }
   }, [location.pathname]);
 

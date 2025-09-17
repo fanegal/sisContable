@@ -10,7 +10,7 @@ export default function Obras({ }) {
         {renderOperations ? <ObraTransactions setRenderOperations={setRenderOperations} /> : <DynamicTable
             selectable={true}
             singleSelection={true}
-            moduleTitle="Obras"
+            moduleTitle=""
             keyTag="email"
             columns={columns}
             data={[
@@ -30,7 +30,7 @@ export default function Obras({ }) {
                 },
                 {
                     title: "Carga masiva",
-                    icon: "border_color",
+                    icon: "Upload",
                     action: () => console.log("Editar"),
                 },
             ]}

@@ -12,7 +12,7 @@ export function ListaRC({ }) {
     {renderOperations ? <RC setRenderOperations={setRenderOperations}/> : <DynamicTable
       selectable={true}
       singleSelection={true}
-      moduleTitle="Ingresos"
+      moduleTitle=""
       keyTag="email"
       columns={columns}
       data={[
@@ -207,12 +207,9 @@ export function ListaRC({ }) {
           cfdi: 'D069E759-49D2-47F9-9952-9D0981BE7CFC'
         }
       ]}
-      onSelectionChange={(selected) => {
-        console.log("Seleccionados:", selected);
+      onSelectionChange={(selected) => { console.log("Seleccionados:", selected);
       }}
-      singleAction={() => {
-        setRenderOperations(true);
-      }}
+      singleAction={() => {setRenderOperations(true);  }}
       actions={[
         {
           title: "Agregar",
