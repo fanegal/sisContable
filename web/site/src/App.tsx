@@ -27,21 +27,6 @@ export default function App() {
       }
     } catch (error) {
 
-<<<<<<< HEAD
-    const p = document.createElement("p");
-    p.className = "title-paragraph";
-    p.textContent = url;
-
-    let el: any = document.querySelector(".search-input") as HTMLInputElement | null;
-    if (el) { 
-      el.replaceWith(p);
-    } else {
-      el = document.querySelector(".title-paragraph") as HTMLInputElement | null;
-      if(el){
-      el.replaceWith(p);
-      }
-=======
->>>>>>> 85287bf2b47ac23b785633b938c52dcc278b855b
     }
   }, [location.pathname]);
 

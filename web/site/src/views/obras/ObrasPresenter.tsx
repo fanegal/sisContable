@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-import { Icon } from "common-lib";
-=======
 import { Chip } from "@/components/atoms/Chip/Chip";
 import { environment } from "@/environment/environment.prod";
 import { httpService } from "@/services/HttpAppService";
 import { dateTimeToFullFormat, Icon, LoadingService } from "common-lib";
->>>>>>> 85287bf2b47ac23b785633b938c52dcc278b855b
 import { useEffect, useState } from "react";
 
 export function useObrasPresenter() {
@@ -118,17 +114,6 @@ export function useObrasPresenter() {
     function onSubmit() {
         console.log("click demo");
     }
-
-    useEffect(() => {
-        let search: any = document.getElementsByClassName("search-content");
-        if (search) {
-            console.log(search[0].children[1].children[0]);
-
-            if (search[0].children[1].children?.length > 1) {
-                search[0].children[1].children[0].remove()
-            }
-        }
-    }, []);
 
     return {
         onSubmit,

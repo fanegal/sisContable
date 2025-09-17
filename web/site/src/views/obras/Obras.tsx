@@ -15,41 +15,6 @@ export default function Obras({ }) {
         goToPage
     } = useObrasPresenter();
 
-<<<<<<< HEAD
-    const { onSubmit, renderOperations, setRenderOperations, columns } = useObrasPresenter();
-
-    return <div className="gral-content">
-        {renderOperations ? <ObraTransactions setRenderOperations={setRenderOperations} /> : <DynamicTable
-            selectable={true}
-            singleSelection={true}
-            moduleTitle=""
-            keyTag="email"
-            columns={columns}
-            data={[
-                { date: '20/12/Dic', fileName: 'Obras.xlsx', status: 'Capturado' },
-                { name: 'Luis', email: 'luis@mail.com', phone: '987654321' }
-            ]}
-            onSelectionChange={(selected) => {
-                console.log("Seleccionados:", selected);
-            }}
-            actions={[
-                {
-                    title: "Carga manual",
-                    icon: "border_color",
-                    action: () => {
-                        setRenderOperations(true);
-                    },
-                },
-                {
-                    title: "Carga masiva",
-                    icon: "Upload",
-                    action: () => console.log("Editar"),
-                },
-            ]}
-        />}
-    </div>
-}
-=======
     return (
         <div className="gral-content">
             {renderOperations ? (
@@ -93,4 +58,3 @@ export default function Obras({ }) {
         </div>
     );
 }
->>>>>>> 85287bf2b47ac23b785633b938c52dcc278b855b
