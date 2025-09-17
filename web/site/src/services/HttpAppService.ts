@@ -1,6 +1,7 @@
 import { basePath, environment } from "@/environment/environment.prod";
 import { HttpService, LocalStorageEncryptService } from "common-lib";
 import type { TokenProvider } from "common-lib";
+import axios from "axios";
 
 class HttpAppService implements TokenProvider {
     private token: string | null = null;
@@ -11,16 +12,21 @@ class HttpAppService implements TokenProvider {
 
     async refreshToken(): Promise<string | null> {
         try {
-            const authHttpService = new HttpService(basePath);
-            let userSession: any = LocalStorageEncryptService.getFromLocalStorage("userSession")
-            const res = await authHttpService.post(environment.tokenPath, {
-                username: userSession.userSession,
-                password: userSession.password
+            let token = LocalStorageEncryptService.getFromLocalStorage("token", true);
+            const res = await axios.post(`${basePath}${environment.updateToken}`, {}, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             });
-            if (res.data && res.data.data && res.data.data.accessToken) {
-                this.token = res.data.data.accessToken;
+console.log("::::::UPDATE TOKEN::::::", res);
+            if (res.data && res.data.data && res.data.data.token) {
+                this.token = res.data.data.token;
+                console.log("::::::UPDATE TOKEN::::::");
+                
+                LocalStorageEncryptService.setToLocalStorage("token", this.token, true)
                 return this.token;
             }
+
             this.token = null;
             return null;
         } catch (err) {

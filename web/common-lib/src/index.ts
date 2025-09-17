@@ -13,6 +13,7 @@ export { default as CustomSwiper } from './components/molecules/swiper/CustomSwi
 export { default as Qr } from './components/molecules/qr/Qr';
 export { default as Progress } from './components/molecules/progress/Progress';
 export { default as Tabs } from './components/molecules/tabs/Tabs';
+export { default as Pagination } from './components/molecules/paginate/Pagination';
 
 //organisims
 export { default as Content } from './components/organisims/content/Content';
@@ -47,3 +48,6 @@ export { initTranslations, changeLanguage } from './i18n/i18n';
 export { default as useDeviceDetect } from './hooks/useDeviceDetect';
 export { default as usePipeDate } from './hooks/usePipeDate';
 export { default as useUserSession } from './hooks/useUserSession';
+
+//utils
+export * from './utils/date';

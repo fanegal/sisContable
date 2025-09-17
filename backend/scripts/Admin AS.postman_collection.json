@@ -1,0 +1,665 @@
+{
+	"info": {
+		"_postman_id": "d9660716-ffab-4736-90be-62f1f8db4eda",
+		"name": "Admin AS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2763892",
+		"_collection_link": "https://martian-sunset-99282.postman.co/workspace/OlamSys~628809c0-37e5-491f-9b47-c4ae25af21e3/collection/2763892-d9660716-ffab-4736-90be-62f1f8db4eda?action=share&source=collection_link&creator=2763892"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "GetToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"if (jsonData.code === 200 && jsonData.data && jsonData.data.token) {",
+									"    pm.environment.set(\"token\", jsonData.data.token);",
+									"    console.log(\"Token guardado en variable de entorno.\");",
+									"} else {",
+									"    console.warn(\"No se pudo guardar el token. Respuesta inválida.\");",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"if (jsonData.code === 200 && jsonData.data && jsonData.data.token) {",
+									"    pm.environment.set(\"token\", jsonData.data.token);",
+									"    console.log(\"Token guardado en variable de entorno.\");",
+									"} else {",
+									"    console.warn(\"No se pudo guardar el token. Respuesta inválida.\");",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/auth/updateToken",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"updateToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"sarrejuan3\",\n    \"password\": \"admin123.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "GetUsers",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserById",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/15",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUsersByPagination",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"page\": 1,\n    \"limit\": 10,\n    \"order_by\": \"id\",\n    \"order_dir\": \"asc\",\n    \"filter_logic\": \"or\",\n    \"filters\": {\n        \"username\": \"admin\",\n        \"create_at\": {\n            \"from\": \"2025-04-15 00:00:00\",\n            \"to\": \"2025-04-15 23:59:59\"\n        }\n    },\n    \"fixed_filters\": {\n        \"id_company\": \"4\"\n    },\n    \"fields\": \"id,username,email,name,custom_data\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/paginated",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"paginated"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateUser",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Juan\",\n    \"last_name\": \"Sarre\",\n    \"username\": \"sarrejuan3\",\n    \"password\": \"admin123.\",\n    \"timezone\": \"MX\",\n    \"email\": \"sarrejuan3@gmail.com\",\n    \"country\": \"MX\",\n    \"custom_data\": {\n        \"ente\": {\n            \"name\": \"Ente 3\",\n            \"value\": 3\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/olamsys/Desktop/users.xlsx"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/user/bulk-upload",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"bulk-upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 12,\n  \"name\": \"Juan Carlos\",\n  \"last_name\": \"Rodríguez\",\n  \"email\": \"nuevoemail@gmail.com\",\n  \"username\": \"juancarlos\",\n  \"password\": \"nuevaClaveSegura123\",\n  \"timezone\": \"MX\",\n  \"country\": \"MX\",\n  \"custom_data\": {\n    \"ente\": {\n      \"name\": \"Nuevo Ente\",\n      \"value\": 42\n    }\n  }\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ids\": [12, 14]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ModulosContables",
+			"item": [
+				{
+					"name": "GetModulosContables",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/modulos-contables",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"modulos-contables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetModulosContablesById",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/modulos-contables/9",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"modulos-contables",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetModulosContablesByPagination",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"page\": 1,\n    \"limit\": 10,\n    \"orderBy\": \"id\",\n    \"orderDir\": \"asc\",\n    \"filterLogic\": \"or\",\n    \"filters\": {\n        \"name\": \"i\"\n    },\n    \"fixedFilters\": {\n        \"idCompany\": \"8\"\n    },\n    \"fields\": \"id,name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/modulos-contables/paginated",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"modulos-contables",
+								"paginated"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateModulosContables",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"idCatalogType\": 3,\n  \"idCompany\": 8,\n  \"name\": \"Alitas Borrar\",\n  \"description\": \"Categoria Alita Borrar\",\n  \"url\": \"https://olamsys.com/cdn/delivery_aldama/alita.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/modulos-contables",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"modulos-contables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/olamsys/Desktop/users.xlsx"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/modulos-contables/bulk-upload",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"modulos-contables",
+								"bulk-upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateModulosContables",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 51,\n    \"idCatalogType\": 3,\n    \"idCompany\": 8,\n    \"name\": \"Alitas Borrar2\",\n    \"description\": \"Categoria Alita Borrar2\",\n    \"url\": \"https://olamsys.com/cdn/delivery_aldama/alita.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/modulos-contables",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"modulos-contables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteModulosContables",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ids\": [51]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/modulos-contables",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"modulos-contables"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

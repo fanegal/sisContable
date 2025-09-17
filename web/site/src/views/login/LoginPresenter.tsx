@@ -214,6 +214,15 @@ export function useLoginPresenter() {
             LoadingService.show()
             let response: any = await httpService.post(environment.login, request);
 
+            const res = await httpService.post(environment.tokenPath, {
+                username: loginForm[0].value,
+                password: loginForm[1].value
+            });
+            if (res.data) {
+                let token:any = res.data.token;
+                LocalStorageEncryptService.setToLocalStorage("token", token, true)
+            }
+
             if (response.code != 200) {
                 LoadingService.hide()
                 AlertService.toast({
@@ -287,7 +296,7 @@ export function useLoginPresenter() {
                                     }}
                                 ></Form>
                             </section>,
-                            cssClass:"selected-exercise"
+                            cssClass: "selected-exercise"
                         });
                     }, 800);
                 } else {
